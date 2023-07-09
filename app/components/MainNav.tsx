@@ -19,6 +19,7 @@ export default function MainNav() {
         <Link to="./core">Core</Link>
         <Link to="./about">About</Link>
         <Link to="login">Login</Link>
+        <Link to="products">Products</Link>
       </div>
 
       <Outlet />
