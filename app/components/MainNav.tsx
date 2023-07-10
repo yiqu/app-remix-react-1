@@ -1,5 +1,7 @@
+import { Stack } from "@mui/material";
 import type { V2_MetaFunction } from "@remix-run/node";
-import { Link, Outlet } from "@remix-run/react";
+import { Link, NavLink, Outlet } from "@remix-run/react";
+import type { NavItem } from "~/shared/models/nav.model";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -9,19 +11,44 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function MainNav() {
+  
+  const navOptions: NavItem[] = [
+    {
+      displayName: 'Core',
+      path: '/core',
+      id: 'core',
+    },
+    {
+      displayName: 'About',
+      path: '/about',
+      id: 'about',
+    },
+    {
+      displayName: 'Products',
+      path: '/products',
+      id: 'products',
+    },
+    {
+      displayName: 'Login',
+      path: '/login',
+      id: 'login',
+    }
+  ];
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+    <div>
       <Link to="/"><h1>Welcome to Remix!!</h1></Link>
-      
-      Look around the app.
 
-      <div>
-        <Link to="./core">Core</Link>
-        <Link to="./about">About</Link>
-        <Link to="login">Login</Link>
-        <Link to="products">Products</Link>
-      </div>
-
+      <Stack direction="row" justifyContent="start" alignItems="center" spacing={ 2 }>
+        {
+          navOptions.map((navItem: NavItem) => {
+            return (
+              <NavLink key={ navItem.id } to={ navItem.path }>{ navItem.displayName }</NavLink>
+            );
+          })
+        }
+      </Stack>
+    
       <Outlet />
 
     </div>

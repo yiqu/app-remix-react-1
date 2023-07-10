@@ -9,9 +9,9 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   return (
-   <div>
-      This app is built with Remix!
-   </div>
+    <div>
+      This app is built with Remix! Feel free to look around.
+    </div>
   );
 }
   

@@ -1,0 +1,67 @@
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a, a:hover {
+  font-weight: 500;
+  color: #2424af;
+  text-decoration: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a.active {
+  color: red;
+  background-color: aquamarine;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+#root {
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.roboto {
+  font-family: 'Roboto';
+}
+
+.josefin {
+  font-family: 'Josefin Sans Variable';
+}
+
+.poppins {
+  font-family: 'Poppins';
+}
+
+.fs-20 {
+  font-size: 25px;
+}
+
+.main-content {
+  height: 100%;
+}
+
+pre, code{
+  white-space:normal;
+}
+
+.infinite-scroll-component__outerdiv {
+  width: 100%;
+}
