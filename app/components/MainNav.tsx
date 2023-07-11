@@ -37,7 +37,7 @@ export default function MainNav() {
 
   return (
     <div>
-      <Link to="/"><h1>Welcome to Remix!!</h1></Link>
+      <Link to="/"><h1>Welcome Products</h1></Link>
 
       <Stack direction="row" justifyContent="start" alignItems="center" spacing={ 2 }>
         {
