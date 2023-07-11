@@ -1,8 +1,6 @@
 import { Stack } from "@mui/material";
 import { Link, NavLink, Outlet } from "@remix-run/react";
 import type { NavItem } from "~/shared/models/nav.model";
-import styles from "~/styles/products.css";
-import { useEffect, useState } from "react";
 import type { Product } from "~/components/Products";
 import type { LoaderArgs, redirect, ActionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node"; // or cloudflare/deno
@@ -16,7 +14,7 @@ import { productionCreateAction } from "~/api/Product.action";
 function Products() {
 
   return (
-    <>
+    <Stack direction="column" justifyContent="start" alignItems="start">
       <div style={ {marginTop: '30px'} } className="cool-font">
         Welcome to <NavLink to="/products">Products</NavLink>
       </div>
@@ -34,7 +32,7 @@ function Products() {
       <div>
         <Outlet />
       </div>
-    </>
+    </Stack>
   );
 }
 

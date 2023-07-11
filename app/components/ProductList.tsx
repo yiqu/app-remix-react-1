@@ -6,7 +6,7 @@ function ProductList() {
   const data = useRouteLoaderData("routes/products") as ProductFire[];
   
   if (!data) {
-    return null;
+    return <>No data</>;
   }
 
   return (
