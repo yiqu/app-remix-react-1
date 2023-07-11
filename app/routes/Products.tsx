@@ -23,7 +23,7 @@ function Products() {
 
   return (
     <div>
-      Product page
+      Product page..
 
       <Outlet />
     </div>
