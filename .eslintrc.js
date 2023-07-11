@@ -35,6 +35,7 @@ module.exports = {
     "no-const-assign": [
       2
     ],
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "import/no-duplicates": "off",
   },
 };

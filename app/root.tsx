@@ -9,7 +9,6 @@ import {
 } from "@remix-run/react";
 import MainNav from "./components/MainNav";
 
-import styles from './styles/index.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -20,11 +19,11 @@ import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
 import '@fontsource-variable/josefin-sans/wght.css';
+import './styles/index.css';
 
 export const links: LinksFunction = () => {
   return [
     ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-    { rel: "stylesheet", href: styles, as: "style" },
   ];
 };
 

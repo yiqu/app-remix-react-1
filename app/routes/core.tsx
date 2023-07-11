@@ -5,9 +5,6 @@ import { useEffect } from "react";
 import { NavItem } from "~/shared/models/nav.model";
 import styles from "~/styles/core.css";
 
-export function links() {
-  return [{ rel: "stylesheet", href: styles, as: "style" }];
-}
 
 export const meta: V2_MetaFunction = (res) => {
   return [
