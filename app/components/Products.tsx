@@ -2,12 +2,8 @@ import { Box, Button, Divider, MenuItem, Stack, Typography } from "@mui/material
 import HFTextField from "~/shared/hook-forms/TextField";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
 import { productSchema } from "~/constants/schemas";
-import { LoaderArgs, redirect, type ActionArgs } from "@remix-run/node";
 import { Form, useSubmit, useNavigation, useLoaderData } from "@remix-run/react";
-import type { ProductFire } from "~/models/products.model";
-import ProductList from "./ProductList";
 
 export interface Product {
   name: string;

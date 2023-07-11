@@ -4,7 +4,6 @@ import { useLoaderData, useNavigation, useSearchParams } from "@remix-run/react"
 import { useEffect, useState } from "react";
 import { productionCreateAction } from "~/api/Product.action";
 import DialogLayout from "~/components/DialogLayout";
-import ProductList from "~/components/ProductList";
 import type { Product } from "~/components/Products";
 import Products from "~/components/Products";
 import type { FirebaseResponse, FirebaseResult} from "~/api/fetch";
