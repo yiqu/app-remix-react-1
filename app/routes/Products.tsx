@@ -39,8 +39,11 @@ function Products() {
 export default Products;
 
 // this is not client code, only server usage. 
-export async function action(args: ActionArgs) {
-  return productionCreateAction(args);
+export async function action({ request, context, params }: ActionArgs) {
+  const body = await request.formData();
+  console.log("METHOD: ", request.method, Object.fromEntries(body));
+  const create$ = await fetchGet<FirebaseResponse>(`https://kq-1-1a499.firebaseio.com/remix-1-products.json`, "POST", Object.fromEntries(body));
+  return json(create$);
 }
 
 export async function loader({ request, params }: LoaderArgs) {
