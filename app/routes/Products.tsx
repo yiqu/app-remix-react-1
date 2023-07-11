@@ -15,7 +15,7 @@ function Products() {
 
   return (
     <Stack direction="column" justifyContent="start" alignItems="start">
-      <div style={ {marginTop: '30px'} } className="cool-font">
+      <div style={ {marginTop: '30px'} } >
         Welcome to <NavLink to="/products">Products</NavLink>
       </div>
 
@@ -28,10 +28,6 @@ function Products() {
           })
         }
       </Stack>
-
-      <div>
-        <Outlet />
-      </div>
     </Stack>
   );
 }
