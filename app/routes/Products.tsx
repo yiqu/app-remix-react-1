@@ -36,6 +36,8 @@ function Products() {
   );
 }
 
+export default Products;
+
 // this is not client code, only server usage. 
 export async function action(args: ActionArgs) {
   return productionCreateAction(args);
@@ -68,5 +70,3 @@ export function ErrorBoundary() {
     <GenericErrorPage />
   );
 }
-
-export default Products;
