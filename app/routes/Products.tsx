@@ -9,6 +9,14 @@ import type { FirebaseResponse, FirebaseResult} from "~/api/fetch";
 import { fetchGet } from "~/api/fetch";
 import { navOptions, type ProductFire } from "~/models/products.model";
 import { productionCreateAction } from "~/api/Product.action";
+import type { V2_MetaFunction } from "@remix-run/react";
+
+export const meta: V2_MetaFunction = (res) => {
+  return [
+    { title: "Products" },
+    { name: "description", content: "Welcome to Products!" },
+  ];
+};
 
 
 function Products() {
@@ -23,6 +31,7 @@ function Products() {
 }
 
 export default Products;
+ // Having it here and then using useRouteData() didnt work??
 
 // this is not client code, only server usage. 
 // export async function action({ request, context, params }: ActionArgs) {
@@ -54,8 +63,8 @@ export default Products;
 //   return json(products);
 // }
 
-export function ErrorBoundary() {
-  return (
-    <GenericErrorPage />
-  );
-}
+// export function ErrorBoundary() {
+//   return (
+//     <GenericErrorPage />
+//   );
+// }
