@@ -25,7 +25,7 @@ export default function MainNav() {
     },
     {
       displayName: 'Products',
-      path: '/productss',
+      path: '/products',
       id: 'products',
     },
     {
