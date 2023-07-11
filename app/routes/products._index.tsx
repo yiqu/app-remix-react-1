@@ -5,9 +5,7 @@ function ProductsIndex() {
 
   return (
     <Stack direction="row" justifyContent="start" alignItems="center">
-      <Typography variant="body2">
-        You can <Link to={ './add-new' }> add </Link> new products, or view other products.
-      </Typography>
+     no
       
     </Stack>
   );
