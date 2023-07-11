@@ -15,7 +15,23 @@ function Products() {
 
   return (
     <Stack direction="column" justifyContent="start" alignItems="start">
-      HII
+      <div style={ {marginTop: '30px'} } className="cool-font">
+        Welcome to <NavLink to="/products">Products</NavLink>
+      </div>
+
+      <Stack direction="row" justifyContent="start" alignItems="center" spacing={ 2 } my={ 3 }>
+        {
+          navOptions.map((navItem: NavItem) => {
+            return (
+              <NavLink key={ navItem.id } to={ navItem.path }>{ navItem.displayName }</NavLink>
+            );
+          })
+        }
+      </Stack>
+
+      <div>
+        <Outlet />
+      </div>
     </Stack>
   );
 }
