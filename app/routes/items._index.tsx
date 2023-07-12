@@ -1,16 +1,6 @@
-import { Stack } from "@mui/material";
-import { NavLink, Outlet } from "@remix-run/react";
-import type { NavItem } from "~/shared/models/nav.model";
-import { navOptions } from "~/models/products.model";
+import type { LoaderFunction} from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 
-
-function ProductsIndex() {
-  
-  return (
-    <div style={ {marginTop: '30px'} } >
-      Welcome to <NavLink to="/items">Items Index Page</NavLink>
-    </div>
-  );
-}
-
-export default ProductsIndex;
+export const loader: LoaderFunction = async ({ request }) => {
+  return redirect("/items/list");
+};

@@ -64,8 +64,6 @@ function Products({ actionUrl = "/products" }: ProductsProps) {
           </Button>
         </Form>
       </Stack>
-      
-      
     </Stack>
   );
 }

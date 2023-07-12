@@ -22,6 +22,7 @@ function DialogLayout({ open, title, maxWidth="lg", onClose, children }: DialogL
       maxWidth={ maxWidth }
       open={ open }
       onClose={ handleClose }
+      transitionDuration={ 0 }
     >
       <DialogTitle sx={ {backgroundColor: "background.default", color: 'text.primary'} }>
         <Stack direction="row" justifyContent="space-between" alignItems="center">

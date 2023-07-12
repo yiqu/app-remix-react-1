@@ -30,7 +30,7 @@ export default function MainNav() {
     },
     {
       displayName: 'Items',
-      path: '/items',
+      path: '/items/list',
       id: 'items',
     },
     {
@@ -41,8 +41,14 @@ export default function MainNav() {
   ];
 
   return (
-    <div>
-      <Link to="/"><h1>Welcome Products</h1></Link>
+    <Stack direction="column" justifyContent="start" alignItems="center">
+      <Link to="/">
+        <Stack direction="row" justifyContent="center" alignItems="center">
+          <img src="/images/mixing.png" alt="logo" height="29px" />
+          <h1>Welcome</h1>
+        </Stack>
+        
+      </Link>
 
       <Stack direction="row" justifyContent="start" alignItems="center" spacing={ 2 }>
         {
@@ -56,7 +62,7 @@ export default function MainNav() {
     
       <Outlet />
 
-    </div>
+    </Stack>
   );
 }
   
