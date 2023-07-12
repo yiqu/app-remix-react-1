@@ -42,7 +42,7 @@ export default function MainNav() {
 
   return (
     <Stack direction="column" justifyContent="start" alignItems="center">
-      <Link to="/">
+      <Link prefetch="intent" to="/">
         <Stack direction="row" justifyContent="center" alignItems="center">
           <img src="/images/mixing.png" alt="logo" height="29px" />
           <h1>Welcome</h1>
