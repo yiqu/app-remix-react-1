@@ -42,7 +42,7 @@ export default function MainNav() {
 
   return (
     <Stack direction="column" justifyContent="start" alignItems="center">
-      <Link prefetch="intent" to="/">
+      <Link to="/">
         <Stack direction="row" justifyContent="center" alignItems="center">
           <img src="/images/mixing.png" alt="logo" height="29px" />
           <h1>Welcome</h1>
@@ -54,7 +54,7 @@ export default function MainNav() {
         {
           navOptions.map((navItem: NavItem) => {
             return (
-              <NavLink key={ navItem.id } to={ navItem.path }>{ navItem.displayName }</NavLink>
+              <NavLink prefetch="intent" key={ navItem.id } to={ navItem.path }>{ navItem.displayName }</NavLink>
             );
           })
         }
