@@ -29,6 +29,11 @@ export default function MainNav() {
       id: 'products',
     },
     {
+      displayName: 'Items',
+      path: '/items',
+      id: 'items',
+    },
+    {
       displayName: 'Login',
       path: '/login',
       id: 'login',
