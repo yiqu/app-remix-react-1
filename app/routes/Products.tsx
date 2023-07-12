@@ -22,11 +22,20 @@ export const meta: V2_MetaFunction = (res) => {
 function Products() {
 
   return (
-    <div>
-      Product page
+    <Stack direction="column" justifyContent="start" alignItems="start">
+
+      <Stack direction="row" justifyContent="start" alignItems="center" spacing={ 2 } my={ 3 }>
+        {
+          navOptions.map((navItem: NavItem) => {
+            return (
+              <NavLink key={ navItem.id } to={ navItem.path }>{ navItem.displayName }</NavLink>
+            );
+          })
+        }
+      </Stack>
 
       <Outlet />
-    </div>
+    </Stack>
   );
 }
 
