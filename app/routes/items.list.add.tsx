@@ -26,7 +26,7 @@ function ItemsAdd() {
 
   const handleFormSubmit = (product: Product, event: any)=> {
     submit(product as any, {
-      action: '/items1',
+      action: '/items',
       method: 'post', 
     });
   };
