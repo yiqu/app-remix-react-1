@@ -18,7 +18,6 @@ const initValue: Product = {
 };
 
 let renderCount = 0;
-
 export interface ProductsProps {
   actionUrl?: string;
 }

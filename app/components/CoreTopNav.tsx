@@ -7,7 +7,7 @@ function CoolComp() {
       Nav:
       <Link to="./level1">Level 1</Link>
     </div>
-  )
+  );
 }
 
 export default CoolComp;

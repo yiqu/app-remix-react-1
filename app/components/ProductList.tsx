@@ -15,7 +15,7 @@ function ProductList() {
         data.map((res) => {
           return (
             <div key={ res.fireId }>
-              Name: { res.name } | Price: { res.price } | Id: { res.id }
+              Name: { res.name } | Price: { res.price } | Date: { res.id }
             </div>
           );
         })

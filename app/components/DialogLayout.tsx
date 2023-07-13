@@ -29,7 +29,6 @@ function DialogLayout({ open, title, maxWidth="lg", onClose, children }: DialogL
           { title}
           <Button aria-label="close" onClick={ handleClose }> Close </Button> 
         </Stack>
-        
       </DialogTitle>
        
       { children }
