@@ -32,7 +32,7 @@ function Items() {
         {
           navOptions.map((navItem: NavItem) => {
             return (
-              <NavLink prefetch="intent" key={ navItem.id } to={ navItem.path }>{ navItem.displayName }</NavLink>
+              <NavLink prefetch="none" key={ navItem.id } to={ navItem.path }>{ navItem.displayName }</NavLink>
             );
           })
         } 
