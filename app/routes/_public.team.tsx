@@ -2,7 +2,7 @@ export default function Team() {
 
   return (
     <div>
-      Meet the team!
+      Meet the team.
     </div>
   )
 }
