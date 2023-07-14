@@ -1,6 +1,6 @@
-import { Stack } from "@mui/material";
+import { Box, LinearProgress, Stack } from "@mui/material";
 import type { V2_MetaFunction } from "@remix-run/node";
-import { Link, NavLink, Outlet } from "@remix-run/react";
+import { Link, NavLink, Outlet, useNavigation } from "@remix-run/react";
 import type { NavItem } from "~/shared/models/nav.model";
 
 export const meta: V2_MetaFunction = () => {
@@ -11,6 +11,9 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export default function MainNav() {
+
+  const navigation = useNavigation();
+  console.log(navigation)
   
   const navOptions: NavItem[] = [
     {
@@ -41,7 +44,7 @@ export default function MainNav() {
   ];
 
   return (
-    <Stack direction="column" justifyContent="start" alignItems="center">
+    <Stack direction="column" justifyContent="start" alignItems="center" spacing={ 2 }>
       <Link to="/">
         <Stack direction="row" justifyContent="center" alignItems="center">
           <img src="/images/mixing.png" alt="logo" height="29px" />
@@ -59,7 +62,12 @@ export default function MainNav() {
           })
         }
       </Stack>
-    
+
+      <Box height="4px" width="23rem">
+        { navigation.state === 'loading' && <LinearProgress color="primary" /> }
+        { navigation.state === 'submitting' && <LinearProgress color="warning" /> }
+      </Box>
+
       <Outlet />
 
     </Stack>
