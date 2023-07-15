@@ -7,13 +7,14 @@ import { json, redirect } from "@remix-run/node";
 import { formatDistanceToNow } from 'date-fns';
 import ItemDisplay from "~/components/Item";
 import type { Item } from "~/models/item.model";
+import { useCallback } from "react";
 
 function ItemsView() {
   const data = useRouteLoaderData('routes/items') as Item[];
   const nav = useNavigate();
   //const data = useLoaderData<typeof loader>();
 
-  const handleItemAction = (item: Item) => (actionId: 'edit' | 'delete') => {
+  const handleItemAction = useCallback((item: Item) => (actionId: 'edit' | 'delete') => {
     switch(actionId) {
       case 'edit': {
         nav(`/items/list/edit/${item.id}`, { state: { item } });
@@ -24,7 +25,7 @@ function ItemsView() {
         break;
       }
     }
-  };
+  }, [nav]);
   
   if (data.length < 1) {
     return (

@@ -12,7 +12,7 @@ export interface ItemProp {
 }
 
 function Item({ item, onAction }: ItemProp) {
-
+  
   const handleActionClick = (action: 'edit' | 'delete') => () => {
     onAction(action);
   };
@@ -40,8 +40,8 @@ function Item({ item, onAction }: ItemProp) {
       <ListItemText
         primary={ <Link to={ `/items/${item.id}` } >{item.name} - ${item.price}</Link> }
         secondary={ <>
-          Created: { formatDistanceToNow(new Date(item.dateAdded).getTime(), {addSuffix: true}) }
-          { item.updatedAt && <> (updated: { formatDistanceToNow(new Date(item.updatedAt).getTime(), {addSuffix: true}) }) </> }
+          Created: { item.dateAdded }
+          { item.updatedAt && <> (updated: { item.updatedAt }) </> }
         </> }
       />
     </ListItem>
