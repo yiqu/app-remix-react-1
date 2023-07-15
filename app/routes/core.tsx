@@ -15,7 +15,6 @@ export const meta: V2_MetaFunction = (res) => {
 
 
 function Core() { 
-
   return (
     <Stack direction="column" justifyContent="start" alignItems="start">
       <div style={ {marginTop: '30px'} } className="cool-font">

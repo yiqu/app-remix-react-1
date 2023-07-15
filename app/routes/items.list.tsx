@@ -1,14 +1,17 @@
-import { Stack, Typography } from "@mui/material";
+import { List, Stack, Typography } from "@mui/material";
 import { Link, Outlet, useActionData, useLoaderData, useRouteLoaderData } from "@remix-run/react";
 import type { ProductFire } from "~/models/products.model";
 import { addItem, getAllItems } from "~/api/items.server";
 import type { ActionArgs} from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { formatDistanceToNow } from 'date-fns';
+import ItemDisplay from "~/components/Item";
+import type { Item } from "~/models/item.model";
 
 function ItemsView() {
-  const data = useLoaderData<typeof loader>();
-
+  const data = useRouteLoaderData('routes/items') as Item[];
+  //const data = useLoaderData<typeof loader>();
+  
   if (data.length < 1) {
     return (
       <div>
@@ -19,19 +22,17 @@ function ItemsView() {
 
   return (
     <Stack direction="column" justifyContent="start" alignItems="start">
-      <Typography>{data.length} items available.</Typography>
+      <Typography width="100%" textAlign="center">{data.length} items available.</Typography>
       <Stack direction="column" justifyContent="start" alignItems="start" width="100%" spacing={ 1 }>
-        <ul>
+        <List dense>
           {
-            data.map((res) => {
+            data.map((res: Item) => {
               return (
-                <li key={ res.id }>
-                  { res.name } { res.price } { formatDistanceToNow(new Date(res.dateAdded).getTime(), {addSuffix: true}) }
-                </li>
+                <ItemDisplay key={ res.id } item={ res } />
               );
             })
           }
-        </ul>
+        </List>
       </Stack>
 
       <Outlet />
@@ -40,6 +41,11 @@ function ItemsView() {
 }
 
 export default ItemsView;
+
+// export async function loader() {
+//   const result = await getAllItems();
+//   return json(result);
+// }
 
 export async function action({ request, context, params }: ActionArgs) {
   const body = await request.formData();
@@ -51,7 +57,3 @@ export async function action({ request, context, params }: ActionArgs) {
   //return new Response(JSON.stringify(result), {status: 200, statusText: 'OK'});
 }
 
-export async function loader() {
-  const result = await getAllItems();
-  return json(result);
-}
