@@ -13,4 +13,5 @@ model Item {
   name      String
   price     Float
   dateAdded DateTime  @default(now())
+  updatedAt DateTime?  @updatedAt
 }

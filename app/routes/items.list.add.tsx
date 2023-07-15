@@ -6,11 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { productSchema } from "~/constants/schemas";
 import { useForm } from "react-hook-form";
 import type { Product } from "~/models/products.model";
+import type { Item, ItemToAdd } from "~/models/item.model";
 
 
-const initValue: Product = {
+const initValue: ItemToAdd = {
   name: "Cool item",
-  id: "1",
   price: 5,
 };
 
@@ -19,13 +19,13 @@ function ItemsAdd() {
 
   const submit = useSubmit();
   const transition = useNavigation();
-  const {  handleSubmit, control, reset } = useForm<Product>({
+  const {  handleSubmit, control, reset } = useForm<ItemToAdd>({
     defaultValues: initValue,
     resolver: yupResolver(productSchema),
     //mode: "onChange"
   });
 
-  const handleFormSubmit = (product: Product, event: any)=> {
+  const handleFormSubmit = (product: ItemToAdd, event: any)=> {
     submit(product as any, {
       action: '/items/list',
       method: 'post', 
@@ -42,20 +42,17 @@ function ItemsAdd() {
 
   return (
     <>
-      <DialogLayout open={ true } onClose={ handleClose } title="Add New Item">
+      <DialogLayout open={ true } onClose={ handleClose } title="Add New Item" maxWidth="xs">
         <Form method="post" onSubmit={ handleSubmit(handleFormSubmit) }>
           <DialogContent>
             <Stack direction="column" justifyContent="start" alignItems="start" width="100%" spacing={ 3 }>
               <Typography variant="h6">
-                Add a new Item: 
+                What do you want to add? 
               </Typography>
-              <Stack direction="column" justifyContent="start" alignItems="start" spacing={ 2 } width="12rem">
-              
+              <Stack direction="column" justifyContent="start" alignItems="start" spacing={ 2 } width="100%">
                 <HFTextField name="name" label="Name" control={ control } variant="standard" type="text" helperText=" name" fullWidth />
-                <HFTextField name="id" label="ID" control={ control } type="text" variant="standard" helperText=" ID" fullWidth />
                 <HFTextField name="price" label="Price" control={ control } type="number" variant="standard" helperText="Price" fullWidth />
-                <Divider variant="fullWidth" flexItem sx={ {my: 3} } /> 
-                <DialogActions>
+                <DialogActions sx={ { width: '100%', display: 'flex', justifyContent: 'end', alignItems: 'center'} }>
                   <Button type="submit" disabled={ transition.state === "submitting" || transition.state === "loading" }>
                     { transition.state === "submitting"? "Creating..." : "Create"   }
                   </Button>

@@ -1,19 +1,35 @@
-import { ListItem, IconButton, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
+import { ListItem, IconButton, ListItemAvatar, Avatar, ListItemText, Stack } from "@mui/material";
 import InventoryIcon from '@mui/icons-material/Inventory';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { Item } from '../models/item.model';
 import { formatDistanceToNow } from "date-fns";
 import { Link } from "@remix-run/react";
 
-function Item({ item }: { item: Item }) {
+export interface ItemProp {
+  item: Item;
+  onAction: (actionId: 'edit' | 'delete') => void;
+}
+
+function Item({ item, onAction }: ItemProp) {
+
+  const handleActionClick = (action: 'edit' | 'delete') => () => {
+    onAction(action);
+  };
 
   return (
     <ListItem
       dense
+      sx={ { pr: '100px' } }
       secondaryAction={
-        <IconButton edge="end" aria-label="delete" size="small">
-          <DeleteIcon />
-        </IconButton>
+        <Stack direction="row" justifyContent="end" alignItems="center">
+          <IconButton edge="end" aria-label="delete" size="small" onClick={ handleActionClick('edit') }>
+            <EditIcon />
+          </IconButton>
+          <IconButton edge="end" aria-label="delete" size="small" onClick={ handleActionClick('delete') }>
+            <DeleteIcon />
+          </IconButton>
+        </Stack>
       }
     >
       <ListItemAvatar>
@@ -24,7 +40,8 @@ function Item({ item }: { item: Item }) {
       <ListItemText
         primary={ <Link to={ `/items/${item.id}` } >{item.name} - ${item.price}</Link> }
         secondary={ <>
-          { formatDistanceToNow(new Date(item.dateAdded).getTime(), {addSuffix: true}) }
+          Created: { formatDistanceToNow(new Date(item.dateAdded).getTime(), {addSuffix: true}) }
+          { item.updatedAt && <> (updated: { formatDistanceToNow(new Date(item.updatedAt).getTime(), {addSuffix: true}) }) </> }
         </> }
       />
     </ListItem>
