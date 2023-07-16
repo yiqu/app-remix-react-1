@@ -52,7 +52,7 @@ export default function MainNav() {
         { showLoading && <LinearProgress color={ navigation.state === 'submitting'  ? 'warning' : 'primary' } /> }
       </Box>
 
-      <Stack direction="row" justifyContent="center" alignItems="start" width="100%" height="100vh"> 
+      <Stack id="main-content" direction="row" justifyContent="center" alignItems="start" width="100%" height="100vh"> 
         <Outlet />
       </Stack>
       
@@ -86,6 +86,11 @@ const navOptions: NavItem[] = [
     displayName: 'Login',
     path: '/login',
     id: 'login',
+  },
+  {
+    displayName: 'Client Only (no SSR)',
+    path: '/clientonly',
+    id: 'clientonly',
   }
 ];
 

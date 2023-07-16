@@ -45,7 +45,9 @@ function ItemsEdit() {
   };
 
   const handleClose = () => {
-    nav("/items/list");
+    nav("/items/list", {
+      preventScrollReset: false,
+    });
   };
 
   if (!currentItem) {

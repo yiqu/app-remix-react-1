@@ -67,3 +67,18 @@ export async function updateItemById(id: string, item: ItemToAdd) {
     throw error;
   }
 }
+
+
+export async function deleteItemById(id: string) {
+  try {
+    const res = await prisma.item.delete({
+      where: {
+        id: id,
+      }
+    });
+    return res;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

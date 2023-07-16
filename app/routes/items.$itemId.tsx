@@ -1,18 +1,18 @@
 import { Divider, Stack, Typography } from "@mui/material";
-import type { LoaderArgs} from "@remix-run/node";
-import { json } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs} from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { Link, isRouteErrorResponse, useLoaderData, useMatches, useParams, useRouteError } from "@remix-run/react";
-import { getItemById } from "~/api/items.server";
+import { deleteItemById, getItemById } from "~/api/items.server";
 import type { Item } from "~/models/item.model";
+
 
 function ItemDetail() {
   const itemDetail = useLoaderData<typeof loader>();
   const params = useParams();
   const matches = useMatches();
-  //console.log(matches)
 
   return (
-    <Stack direction="column" justifyContent="start" alignItems="start" spacing={ 3 }>
+    <Stack direction="column" justifyContent="start" alignItems="start" spacing={ 3 }  width="30rem">
       <Typography width="100%" textAlign="center">Item Detail</Typography>
       <Divider flexItem variant="fullWidth" />
       <Stack direction="column" justifyContent="start" alignItems="start" width="100%" spacing={ 1 }>
@@ -38,6 +38,14 @@ export async function loader({ request, params, context }: LoaderArgs) {
     );
   });
   return json(itemDetail);
+}
+
+export async function action({ request, context, params }: ActionArgs) {
+  if (params.itemId) {
+    await deleteItemById(params.itemId as string);
+    return redirect('/items/list?deleted=true');
+  }
+  return redirect('/items/list');
 }
 
 export function ErrorBoundary() {

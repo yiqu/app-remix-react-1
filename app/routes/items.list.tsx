@@ -1,7 +1,7 @@
 import { List, Stack, Typography } from "@mui/material";
 import { Link, Outlet, useActionData, useLoaderData, useNavigate, useRouteLoaderData } from "@remix-run/react";
 import type { ProductFire } from "~/models/products.model";
-import { addItem, getAllItems, updateItemById } from "~/api/items.server";
+import { addItem, deleteItemById, getAllItems, updateItemById } from "~/api/items.server";
 import type { ActionArgs} from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { formatDistanceToNow } from 'date-fns';
@@ -36,10 +36,10 @@ function ItemsView() {
   }
 
   return (
-    <Stack direction="column" justifyContent="start" alignItems="start">
+    <Stack direction="column" justifyContent="start" alignItems="center" id="item-list" width="30rem">
       <Typography width="100%" textAlign="center">{data.length} items available.</Typography>
-      <Stack direction="column" justifyContent="start" alignItems="start" width="100%" spacing={ 1 }>
-        <List dense>
+      <Stack direction="column" justifyContent="start" alignItems="center" width="100%" spacing={ 1 }>
+        <List dense sx={ {width: '100%'} }>
           {
             data.map((res: Item) => {
               return (
@@ -62,14 +62,18 @@ export async function action({ request, context, params }: ActionArgs) {
   const body = await request.formData();
   const intent = body.get("intent") as 'delete' | 'update' | null;
   let result: any;
+  let action = "create";
 
   if (intent === 'delete') {
+    result = await deleteItemById(body.get("id") as string);
+    action = "delete";
   }
   if (intent === 'update') {
     result = await updateItemById(body.get("id") as string, {
       name: body.get("name") as string,
       price: +(body.get("price") ?? -1), 
     });
+    action = "update";
   }
   if (intent === null) {
     result = await addItem({
@@ -77,7 +81,7 @@ export async function action({ request, context, params }: ActionArgs) {
       price: +(body.get("price") ?? -1), 
     });
   }
-  return redirect(`/items/list?createdName=${body.get('name')}`);
+  return redirect(`/items/list?${action}=${body.get('name')}`);
   //return redirect(`/items/list`);
   //return new Response(JSON.stringify(result), {status: 200, statusText: 'OK'});
 }

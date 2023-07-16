@@ -20,7 +20,10 @@ function ItemsAdd() {
   const submit = useSubmit();
   const transition = useNavigation();
   const {  handleSubmit, control, reset } = useForm<ItemToAdd>({
-    defaultValues: initValue,
+    defaultValues: {
+      name: faker.commerce.product(),
+      price: faker.number.float({ min: 10, max: 1000, precision: 0.01 }),
+    },
     resolver: yupResolver(productSchema),
     //mode: "onChange"
   });

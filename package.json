@@ -33,6 +33,7 @@
     "react-hook-form": "^7.45.1",
     "react-tooltip": "^5.9.1",
     "react-use": "^17.4.0",
+    "remix-utils": "^6.6.0",
     "urlcat": "^3.0.0",
     "yup": "^0.32.11"
   },
