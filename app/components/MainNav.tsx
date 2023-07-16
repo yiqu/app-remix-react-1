@@ -19,9 +19,9 @@ export default function MainNav() {
   return (
     <Stack direction="column" justifyContent="start" alignItems="center" spacing={ 2 }>
       <Link to="/">
-        <Stack direction="row" justifyContent="center" alignItems="center">
+        <Stack direction="row" justifyContent="center" alignItems="center" spacing={ 2 }>
           <img src="/images/mixing.png" alt="logo" height="29px" />
-          <h1>Welcome</h1>
+          <h1>Kevin's Grocery List</h1>
         </Stack>
         
       </Link>
@@ -63,19 +63,14 @@ export default function MainNav() {
   
 const navOptions: NavItem[] = [
   {
-    displayName: 'Core',
-    path: '/core',
-    id: 'core',
+    displayName: 'Wishlist',
+    path: '/wishlist',
+    id: 'wishlist',
   },
   {
-    displayName: 'About',
-    path: '/about',
-    id: 'about',
-  },
-  {
-    displayName: 'Products',
-    path: '/products',
-    id: 'products',
+    displayName: 'Deals',
+    path: '/deals',
+    id: 'deals',
   },
   {
     displayName: 'Items',
@@ -83,15 +78,20 @@ const navOptions: NavItem[] = [
     id: 'items',
   },
   {
-    displayName: 'Login',
-    path: '/login',
-    id: 'login',
+    displayName: 'About',
+    path: '/about',
+    id: 'about',
   },
   {
     displayName: 'Client Only (no SSR)',
     path: '/clientonly',
     id: 'clientonly',
-  }
+  },
+  {
+    displayName: 'Login',
+    path: '/login',
+    id: 'login',
+  },
 ];
 
 export const getPrefetch = (routeId: string) => {
