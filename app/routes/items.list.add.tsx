@@ -7,11 +7,11 @@ import { productSchema } from "~/constants/schemas";
 import { useForm } from "react-hook-form";
 import type { Product } from "~/models/products.model";
 import type { Item, ItemToAdd } from "~/models/item.model";
-
+import { faker } from '@faker-js/faker';
 
 const initValue: ItemToAdd = {
-  name: "Cool item",
-  price: 5,
+  name: faker.commerce.product(),
+  price: faker.number.float({ min: 10, max: 1000, precision: 0.01 }),
 };
 
 function ItemsAdd() {
