@@ -40,8 +40,8 @@ function Item({ item, onAction }: ItemProp) {
       <ListItemText
         primary={ <Link to={ `/items/${item.id}` } >{item.name} - ${item.price}</Link> }
         secondary={ <>
-          Created: { item.dateAdded }
-          { item.updatedAt && <> (updated: { item.updatedAt }) </> }
+          Created: { formatDistanceToNow(new Date(item.dateAdded), {addSuffix: true}) }
+          { (item.updatedAt && item.updatedAt !== item.dateAdded) && <> (updated: { formatDistanceToNow(new Date(item.updatedAt), {addSuffix: true}) }) </> }
         </> }
       />
     </ListItem>
