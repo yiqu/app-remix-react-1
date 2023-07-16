@@ -9,7 +9,6 @@ import type { Item } from "~/models/item.model";
 function ItemDetail() {
   const itemDetail = useLoaderData<typeof loader>();
   const params = useParams();
-  const matches = useMatches();
 
   return (
     <Stack direction="column" justifyContent="start" alignItems="start" spacing={ 3 }  width="30rem">
@@ -43,7 +42,8 @@ export async function loader({ request, params, context }: LoaderArgs) {
 export async function action({ request, context, params }: ActionArgs) {
   if (params.itemId) {
     await deleteItemById(params.itemId as string);
-    return redirect('/items/list?deleted=true');
+    //return redirect('/items/list?deleted=true');
+    return json({ deleted: true }, { status: 200, statusText: 'OK' });
   }
   return redirect('/items/list');
 }

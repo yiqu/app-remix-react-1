@@ -40,7 +40,7 @@ function Items() {
         {
           navOptions.map((navItem: NavItem) => {
             return (
-              <NavLink prefetch="none" key={ navItem.id } to={ navItem.path } end>
+              <NavLink prefetch="none" key={ navItem.id } to={ navItem.path } >
                 { navItem.displayName }
               </NavLink>
             );
