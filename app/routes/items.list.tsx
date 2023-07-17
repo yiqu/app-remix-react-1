@@ -46,8 +46,8 @@ function ItemsView() {
     <Stack direction="column" justifyContent="start" alignItems="center" id="item-list" width="30rem">
       <Stack direction="row" justifyContent="start" alignItems="center" width="100%">
         <Typography width="100%" textAlign="start">{data.length} items available.</Typography>
-        <Button startIcon={ <Refresh /> } variant="outlined" onClick={ handleOnRefresh } disabled={ fetcher.state === 'loading' }>
-          { fetcher.state === 'loading' ? 'Refreshing...' : 'Refresh' }
+        <Button startIcon={ <Refresh /> } variant="outlined" onClick={ handleOnRefresh } >
+          Refresh
         </Button>
       </Stack>
       <Stack direction="column" justifyContent="start" alignItems="center" width="100%" spacing={ 1 }>
