@@ -37,7 +37,7 @@ function ItemsView() {
   if (data.length < 1) {
     return (
       <div>
-        Item list is empty! <Link to="add">Add an item here.  </Link>
+        Item list is empty! <Link to="add">Add an item here..  </Link>
       </div>
     );
   }
