@@ -1,10 +1,11 @@
 import { json, type V2_MetaFunction } from "@remix-run/node";
-import { Button, List, Stack, Typography } from "@mui/material";
-import { Link, Outlet, useActionData, useFetcher, useLoaderData, useNavigate, useRouteLoaderData } from "@remix-run/react";
+import { Box, Button, List, Stack, Typography } from "@mui/material";
+import { Link, useLoaderData, useNavigate } from "@remix-run/react";
 import ItemDisplay from "~/components/Item";
 import type { Item } from "~/models/item.model";
 import { useCallback } from "react";
 import Refresh from "@mui/icons-material/Refresh";
+import Add from "@mui/icons-material/Add";
 import { getAllItems } from "~/api/items.server";
 
 export const meta: V2_MetaFunction = () => {
@@ -35,6 +36,10 @@ export default function Index() {
     }
   }, [nav]);
 
+  const handleAdd = () => {
+    
+  };
+
   if (data.length < 1) {
     return (
       <div>
@@ -44,12 +49,17 @@ export default function Index() {
   }
 
   return (
-    <Stack direction="column" justifyContent="start" alignItems="center" id="item-list" width="30rem">
-      <Stack direction="row" justifyContent="start" alignItems="center" width="100%">
-        <Typography width="100%" textAlign="start">{data.length} items available.</Typography>
-        <Button startIcon={ <Refresh /> } variant="outlined" onClick={ handleOnRefresh }>
-          Refresh
-        </Button>
+    <Stack direction="column" justifyContent="start" alignItems="center" id="item-list" width="30rem" spacing={ 2 }>
+      <Stack direction="row" justifyContent="space-between" alignItems="center" width="100%">
+        <Typography flexBasis="35%" textAlign="start">{data.length} items available.</Typography>
+        <Stack direction="row" justifyContent="end" alignItems="center" spacing={ 1 }>
+          <Button startIcon={ <Add /> } variant="outlined" onClick={ handleAdd }>
+            New Item
+          </Button>
+          <Button startIcon={ <Refresh /> } variant="outlined" onClick={ handleOnRefresh }>
+            Refresh
+          </Button>
+        </Stack>
       </Stack>
       <Stack direction="column" justifyContent="start" alignItems="center" width="100%" spacing={ 1 }>
         <List dense sx={ {width: '100%'} }>
@@ -62,8 +72,6 @@ export default function Index() {
           }
         </List>
       </Stack>
-
-      <Outlet />
     </Stack>
   );
 }

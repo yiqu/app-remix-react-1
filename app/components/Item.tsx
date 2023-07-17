@@ -1,5 +1,4 @@
 import { ListItem, IconButton, ListItemAvatar, Avatar, ListItemText, Stack } from "@mui/material";
-import InventoryIcon from '@mui/icons-material/Inventory';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Item } from '../models/item.model';
@@ -7,6 +6,8 @@ import { Form, Link, useFetcher } from "@remix-run/react";
 import { ClientOnly } from "remix-utils";
 import DateDisplay from "~/client-components/DateDisplay.client";
 import { ellipsis, ellipsisBlock } from "~/shared/css.utils";
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+
 
 export interface ItemProp {
   item: Item;
@@ -60,14 +61,14 @@ function Item({ item, onAction }: ItemProp) {
     >
       <ListItemAvatar>
         <Avatar>
-          <InventoryIcon fontSize="small" />
+          <LocalGroceryStoreIcon fontSize="small" />
         </Avatar>
       </ListItemAvatar>
       <ListItemText
         primaryTypographyProps={ {...ellipsis} }
         primary={ 
           <span style={ {...ellipsisBlock} }> 
-            <Link to={ `/items/${item.id}` } >
+            <Link to={ `/item/${item.id}` } >
               {item.name} - ${item.price}
             </Link>
             { apiWorking && ' (Deleting...)' }

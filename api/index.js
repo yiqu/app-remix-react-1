@@ -195,13 +195,13 @@ var import_material = require("@mui/material"), import_react2 = require("@remix-
 function MainNav() {
   let navigation = (0, import_react2.useNavigation)(), location = (0, import_react2.useLocation)(), showLoading = navigation.state === "loading" || navigation.state === "submitting";
   return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_material.Stack, { direction: "column", justifyContent: "start", alignItems: "center", spacing: 2, children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Link, { to: "/", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_material.Stack, { direction: "row", justifyContent: "center", alignItems: "center", spacing: 2, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Link, { to: "/", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_material.Stack, { direction: "row", justifyContent: "center", alignItems: "center", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("img", { src: "/images/mixing.png", alt: "logo", height: "29px" }, void 0, !1, {
         fileName: "app/components/MainNav.tsx",
         lineNumber: 23,
         columnNumber: 11
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("h1", { children: "Kevin's Grocery List" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("h1", { style: { marginLeft: "10px" }, children: "Kevin's Grocery List" }, void 0, !1, {
         fileName: "app/components/MainNav.tsx",
         lineNumber: 24,
         columnNumber: 11
@@ -220,7 +220,7 @@ function MainNav() {
       {
         prefetch: getPrefetch(navItem.id),
         to: navItem.path,
-        className: ({ isActive, isPending }) => location.pathname.includes("/items/") ? location.pathname.includes(navItem.path.split("/")[1]) ? "active" : "" : isPending ? "pending" : isActive ? "active" : "",
+        className: ({ isActive, isPending }) => location.pathname.includes("/item/") ? location.pathname.includes(navItem.path.split("/")[1]) ? "active" : "" : isPending ? "pending" : isActive ? "active" : "",
         children: navItem.displayName
       },
       navItem.id,
@@ -262,6 +262,11 @@ function MainNav() {
 }
 var navOptions = [
   {
+    displayName: "Home",
+    path: "/",
+    id: "home"
+  },
+  {
     displayName: "Wishlist",
     path: "/wishlist",
     id: "wishlist"
@@ -285,6 +290,11 @@ var navOptions = [
     displayName: "Client Only (no SSR)",
     path: "/clientonly",
     id: "clientonly"
+  },
+  {
+    displayName: "Team",
+    path: "/team",
+    id: "team"
   },
   {
     displayName: "Login",
@@ -634,6 +644,131 @@ function CoreLevel1Index() {
 }
 var core_level1_index_default = CoreLevel1Index;
 
+// app/routes/item.$itemId.edit.tsx
+var item_itemId_edit_exports = {};
+__export(item_itemId_edit_exports, {
+  default: () => item_itemId_edit_default
+});
+init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
+var import_material5 = require("@mui/material"), import_react5 = require("@remix-run/react");
+var import_yup2 = require("@hookform/resolvers/yup");
+var import_react_hook_form3 = require("react-hook-form");
+var import_jsx_dev_runtime9 = require("react/jsx-dev-runtime");
+function EditItem() {
+  var _a;
+  let params = (0, import_react5.useParams)(), nav = (0, import_react5.useNavigate)(), match = (0, import_react5.useMatches)(), submit = (0, import_react5.useSubmit)(), transition = (0, import_react5.useNavigation)(), item = (_a = match.find((route) => route.id === "routes/item.$itemId")) == null ? void 0 : _a.data, { handleSubmit, control, reset } = (0, import_react_hook_form3.useForm)({
+    defaultValues: { ...item ?? {} },
+    resolver: (0, import_yup2.yupResolver)(productSchema),
+    mode: "onChange"
+  }), handleFormSubmit = (product, event) => {
+    submit({ ...product, intent: "update" }, {
+      action: "/item/item.$itemId",
+      method: "patch",
+      replace: !0
+    });
+  }, handleOnReset = () => {
+    reset();
+  }, handleClose = () => {
+    nav(`/item/${params.itemId}`, { replace: !0 });
+  };
+  return item ? /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_jsx_dev_runtime9.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(DialogLayout_default, { open: !0, onClose: handleClose, title: "Edit Item", maxWidth: "xs", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_react5.Form, { method: "post", onSubmit: handleSubmit(handleFormSubmit), children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.DialogContent, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 3, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Typography, { variant: "h6", children: "Edit:" }, void 0, !1, {
+      fileName: "app/routes/item.$itemId.edit.tsx",
+      lineNumber: 72,
+      columnNumber: 15
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 2, width: "100%", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(TextField_default, { name: "name", label: "Name", control, variant: "standard", type: "text", helperText: " name", fullWidth: !0 }, void 0, !1, {
+        fileName: "app/routes/item.$itemId.edit.tsx",
+        lineNumber: 76,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(TextField_default, { name: "price", label: "Price", control, type: "number", variant: "standard", helperText: "Price", fullWidth: !0 }, void 0, !1, {
+        fileName: "app/routes/item.$itemId.edit.tsx",
+        lineNumber: 77,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.DialogActions, { sx: { width: "100%", display: "flex", justifyContent: "end", alignItems: "center" }, children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Button, { type: "submit", disabled: transition.state === "submitting" || transition.state === "loading", name: "intent", value: "update", children: transition.state === "submitting" ? "Updating..." : "Update" }, void 0, !1, {
+          fileName: "app/routes/item.$itemId.edit.tsx",
+          lineNumber: 79,
+          columnNumber: 19
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Button, { type: "reset", onClick: handleOnReset, children: "Reset" }, void 0, !1, {
+          fileName: "app/routes/item.$itemId.edit.tsx",
+          lineNumber: 82,
+          columnNumber: 19
+        }, this)
+      ] }, void 0, !0, {
+        fileName: "app/routes/item.$itemId.edit.tsx",
+        lineNumber: 78,
+        columnNumber: 17
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/item.$itemId.edit.tsx",
+      lineNumber: 75,
+      columnNumber: 15
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/item.$itemId.edit.tsx",
+    lineNumber: 71,
+    columnNumber: 13
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/item.$itemId.edit.tsx",
+    lineNumber: 70,
+    columnNumber: 11
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/item.$itemId.edit.tsx",
+    lineNumber: 69,
+    columnNumber: 9
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/item.$itemId.edit.tsx",
+    lineNumber: 68,
+    columnNumber: 7
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/item.$itemId.edit.tsx",
+    lineNumber: 67,
+    columnNumber: 5
+  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(DialogLayout_default, { open: !0, onClose: handleClose, title: "Edit Item", maxWidth: "xs", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.DialogContent, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 3, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Typography, { variant: "h6", children: [
+      "Item ",
+      params.itemId,
+      " not found!"
+    ] }, void 0, !0, {
+      fileName: "app/routes/item.$itemId.edit.tsx",
+      lineNumber: 51,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Divider, {}, void 0, !1, {
+      fileName: "app/routes/item.$itemId.edit.tsx",
+      lineNumber: 54,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.DialogActions, { sx: { width: "100%", display: "flex", justifyContent: "end", alignItems: "center" }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Button, { onClick: handleClose, children: "Close" }, void 0, !1, {
+      fileName: "app/routes/item.$itemId.edit.tsx",
+      lineNumber: 56,
+      columnNumber: 15
+    }, this) }, void 0, !1, {
+      fileName: "app/routes/item.$itemId.edit.tsx",
+      lineNumber: 55,
+      columnNumber: 13
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/item.$itemId.edit.tsx",
+    lineNumber: 50,
+    columnNumber: 11
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/item.$itemId.edit.tsx",
+    lineNumber: 49,
+    columnNumber: 9
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/item.$itemId.edit.tsx",
+    lineNumber: 48,
+    columnNumber: 7
+  }, this);
+}
+var item_itemId_edit_default = EditItem;
+
 // app/routes/products.add-new.tsx
 var products_add_new_exports = {};
 __export(products_add_new_exports, {
@@ -642,7 +777,7 @@ __export(products_add_new_exports, {
   loader: () => loader
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material6 = require("@mui/material"), import_node3 = require("@remix-run/node"), import_react6 = require("@remix-run/react");
+var import_material7 = require("@mui/material"), import_node3 = require("@remix-run/node"), import_react7 = require("@remix-run/react");
 
 // app/api/Product.action.ts
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
@@ -680,17 +815,17 @@ async function productionCreateAction({ request, context, params }) {
 
 // app/components/Products.tsx
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material5 = require("@mui/material");
-var import_react_hook_form3 = require("react-hook-form"), import_yup2 = require("@hookform/resolvers/yup");
-var import_react5 = require("@remix-run/react"), import_jsx_dev_runtime9 = require("react/jsx-dev-runtime"), initValue = {
+var import_material6 = require("@mui/material");
+var import_react_hook_form4 = require("react-hook-form"), import_yup3 = require("@hookform/resolvers/yup");
+var import_react6 = require("@remix-run/react"), import_jsx_dev_runtime10 = require("react/jsx-dev-runtime"), initValue = {
   name: "Cool product",
   id: "1",
   price: 5
 }, renderCount = 0;
 function Products({ actionUrl = "/products" }) {
-  let submit = (0, import_react5.useSubmit)(), transition = (0, import_react5.useNavigation)(), { handleSubmit, control, reset } = (0, import_react_hook_form3.useForm)({
+  let submit = (0, import_react6.useSubmit)(), transition = (0, import_react6.useNavigation)(), { handleSubmit, control, reset } = (0, import_react_hook_form4.useForm)({
     defaultValues: initValue,
-    resolver: (0, import_yup2.yupResolver)(productSchema)
+    resolver: (0, import_yup3.yupResolver)(productSchema)
     //mode: "onChange"
   }), handleFormSubmit = (product, event) => {
     submit(product, {
@@ -700,13 +835,13 @@ function Products({ actionUrl = "/products" }) {
   }, handleOnReset = () => {
     reset();
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 3, children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Typography, { variant: "h6", children: "Add a new Product" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_material6.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 3, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_material6.Typography, { variant: "h6", children: "Add a new Product" }, void 0, !1, {
       fileName: "app/components/Products.tsx",
       lineNumber: 47,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("span", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("span", { children: [
       "Render count: ",
       renderCount
     ] }, void 0, !0, {
@@ -714,33 +849,33 @@ function Products({ actionUrl = "/products" }) {
       lineNumber: 50,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 2, width: "12rem", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_react5.Form, { method: "post", onSubmit: handleSubmit(handleFormSubmit), children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(TextField_default, { name: "name", label: "Name", control, variant: "standard", type: "text", helperText: " name", fullWidth: !0 }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_material6.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 2, width: "12rem", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_react6.Form, { method: "post", onSubmit: handleSubmit(handleFormSubmit), children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(TextField_default, { name: "name", label: "Name", control, variant: "standard", type: "text", helperText: " name", fullWidth: !0 }, void 0, !1, {
         fileName: "app/components/Products.tsx",
         lineNumber: 54,
         columnNumber: 11
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(TextField_default, { name: "id", label: "ID", control, type: "text", variant: "standard", helperText: " ID", fullWidth: !0 }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(TextField_default, { name: "id", label: "ID", control, type: "text", variant: "standard", helperText: " ID", fullWidth: !0 }, void 0, !1, {
         fileName: "app/components/Products.tsx",
         lineNumber: 55,
         columnNumber: 11
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(TextField_default, { name: "price", label: "Price", control, type: "number", variant: "standard", helperText: "Price", fullWidth: !0 }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(TextField_default, { name: "price", label: "Price", control, type: "number", variant: "standard", helperText: "Price", fullWidth: !0 }, void 0, !1, {
         fileName: "app/components/Products.tsx",
         lineNumber: 56,
         columnNumber: 11
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Divider, { variant: "fullWidth", flexItem: !0, sx: { my: 3 } }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_material6.Divider, { variant: "fullWidth", flexItem: !0, sx: { my: 3 } }, void 0, !1, {
         fileName: "app/components/Products.tsx",
         lineNumber: 57,
         columnNumber: 11
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Button, { type: "submit", disabled: transition.state === "submitting" || transition.state === "loading", children: transition.state === "submitting" ? "Creating..." : "Create" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_material6.Button, { type: "submit", disabled: transition.state === "submitting" || transition.state === "loading", children: transition.state === "submitting" ? "Creating..." : "Create" }, void 0, !1, {
         fileName: "app/components/Products.tsx",
         lineNumber: 58,
         columnNumber: 11
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_material5.Button, { type: "reset", onClick: handleOnReset, children: "Reset" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_material6.Button, { type: "reset", onClick: handleOnReset, children: "Reset" }, void 0, !1, {
         fileName: "app/components/Products.tsx",
         lineNumber: 61,
         columnNumber: 11
@@ -763,16 +898,16 @@ function Products({ actionUrl = "/products" }) {
 var Products_default = Products;
 
 // app/routes/products.add-new.tsx
-var import_jsx_dev_runtime10 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime11 = require("react/jsx-dev-runtime");
 function ProductsAdd() {
-  let data = (0, import_react6.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_material6.Stack, { direction: "column", justifyContent: "start", alignItems: "start", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(Products_default, { actionUrl: "/products/add-new" }, void 0, !1, {
+  let data = (0, import_react7.useLoaderData)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_material7.Stack, { direction: "column", justifyContent: "start", alignItems: "start", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(Products_default, { actionUrl: "/products/add-new" }, void 0, !1, {
       fileName: "app/routes/products.add-new.tsx",
       lineNumber: 18,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_material6.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 1, children: data.map((res) => /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_material7.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 1, children: data.map((res) => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("div", { children: [
       "Name: ",
       res.name,
       " | Price: ",
@@ -814,11 +949,11 @@ __export(products_index_exports, {
   default: () => products_index_default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_react7 = require("@remix-run/react"), import_jsx_dev_runtime11 = require("react/jsx-dev-runtime");
+var import_react8 = require("@remix-run/react"), import_jsx_dev_runtime12 = require("react/jsx-dev-runtime");
 function ProductsIndex() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("div", { style: { marginTop: "30px" }, className: "cool-font", children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { style: { marginTop: "30px" }, className: "cool-font", children: [
     "Welcome to ",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_react7.NavLink, { to: "/products", children: "Products Index Page" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react8.NavLink, { to: "/products", children: "Products Index Page" }, void 0, !1, {
       fileName: "app/routes/products._index.tsx",
       lineNumber: 11,
       columnNumber: 18
@@ -837,19 +972,19 @@ __export(items_list_add_exports, {
   default: () => items_list_add_default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material7 = require("@mui/material"), import_react8 = require("@remix-run/react");
-var import_yup3 = require("@hookform/resolvers/yup");
-var import_react_hook_form4 = require("react-hook-form"), import_faker = require("@faker-js/faker"), import_jsx_dev_runtime12 = require("react/jsx-dev-runtime"), initValue2 = {
+var import_material8 = require("@mui/material"), import_react9 = require("@remix-run/react");
+var import_yup4 = require("@hookform/resolvers/yup");
+var import_react_hook_form5 = require("react-hook-form"), import_faker = require("@faker-js/faker"), import_jsx_dev_runtime13 = require("react/jsx-dev-runtime"), initValue2 = {
   name: import_faker.faker.commerce.product(),
   price: import_faker.faker.number.float({ min: 10, max: 1e3, precision: 0.01 })
 };
 function ItemsAdd() {
-  let nav = (0, import_react8.useNavigate)(), submit = (0, import_react8.useSubmit)(), transition = (0, import_react8.useNavigation)(), { handleSubmit, control, reset } = (0, import_react_hook_form4.useForm)({
+  let nav = (0, import_react9.useNavigate)(), submit = (0, import_react9.useSubmit)(), transition = (0, import_react9.useNavigation)(), { handleSubmit, control, reset } = (0, import_react_hook_form5.useForm)({
     defaultValues: {
       name: import_faker.faker.commerce.product(),
       price: import_faker.faker.number.float({ min: 10, max: 1e3, precision: 0.01 })
     },
-    resolver: (0, import_yup3.yupResolver)(productSchema)
+    resolver: (0, import_yup4.yupResolver)(productSchema)
     //mode: "onChange"
   }), handleFormSubmit = (product, event) => {
     submit(product, {
@@ -859,32 +994,32 @@ function ItemsAdd() {
   }, handleOnReset = () => {
     reset();
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_jsx_dev_runtime12.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(DialogLayout_default, { open: !0, onClose: () => {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_jsx_dev_runtime13.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(DialogLayout_default, { open: !0, onClose: () => {
     nav("/items");
-  }, title: "Add New Item", maxWidth: "xs", children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react8.Form, { method: "post", onSubmit: handleSubmit(handleFormSubmit), children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_material7.DialogContent, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_material7.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 3, children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_material7.Typography, { variant: "h6", children: "What do you want to add?" }, void 0, !1, {
+  }, title: "Add New Item", maxWidth: "xs", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_react9.Form, { method: "post", onSubmit: handleSubmit(handleFormSubmit), children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.DialogContent, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 3, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.Typography, { variant: "h6", children: "What do you want to add?" }, void 0, !1, {
       fileName: "app/routes/items.list.add.tsx",
       lineNumber: 52,
       columnNumber: 15
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_material7.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 2, width: "100%", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(TextField_default, { name: "name", label: "Name", control, variant: "standard", type: "text", helperText: " name", fullWidth: !0 }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 2, width: "100%", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(TextField_default, { name: "name", label: "Name", control, variant: "standard", type: "text", helperText: " name", fullWidth: !0 }, void 0, !1, {
         fileName: "app/routes/items.list.add.tsx",
         lineNumber: 56,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(TextField_default, { name: "price", label: "Price", control, type: "number", variant: "standard", helperText: "Price", fullWidth: !0 }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(TextField_default, { name: "price", label: "Price", control, type: "number", variant: "standard", helperText: "Price", fullWidth: !0 }, void 0, !1, {
         fileName: "app/routes/items.list.add.tsx",
         lineNumber: 57,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_material7.DialogActions, { sx: { width: "100%", display: "flex", justifyContent: "end", alignItems: "center" }, children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_material7.Button, { type: "submit", disabled: transition.state === "submitting" || transition.state === "loading", children: transition.state === "submitting" ? "Creating..." : "Create" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.DialogActions, { sx: { width: "100%", display: "flex", justifyContent: "end", alignItems: "center" }, children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.Button, { type: "submit", disabled: transition.state === "submitting" || transition.state === "loading", children: transition.state === "submitting" ? "Creating..." : "Create" }, void 0, !1, {
           fileName: "app/routes/items.list.add.tsx",
           lineNumber: 59,
           columnNumber: 19
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_material7.Button, { type: "reset", onClick: handleOnReset, children: "Reset" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.Button, { type: "reset", onClick: handleOnReset, children: "Reset" }, void 0, !1, {
           fileName: "app/routes/items.list.add.tsx",
           lineNumber: 62,
           columnNumber: 19
@@ -931,11 +1066,11 @@ __export(public_index_exports, {
   meta: () => meta
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_node5 = require("@remix-run/node"), import_material9 = require("@mui/material"), import_react10 = require("@remix-run/react");
+var import_node5 = require("@remix-run/node"), import_material10 = require("@mui/material"), import_react11 = require("@remix-run/react");
 
 // app/components/Item.tsx
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material8 = require("@mui/material"), import_Inventory = __toESM(require("@mui/icons-material/Inventory")), import_Delete = __toESM(require("@mui/icons-material/Delete")), import_Edit = __toESM(require("@mui/icons-material/Edit")), import_react9 = require("@remix-run/react"), import_remix_utils = require("remix-utils"), import_DateDisplay = __toESM(require_DateDisplay());
+var import_material9 = require("@mui/material"), import_Delete = __toESM(require("@mui/icons-material/Delete")), import_Edit = __toESM(require("@mui/icons-material/Edit")), import_react10 = require("@remix-run/react"), import_remix_utils = require("remix-utils"), import_DateDisplay = __toESM(require_DateDisplay());
 
 // app/shared/css.utils.ts
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
@@ -953,10 +1088,10 @@ var ellipsis = {
 };
 
 // app/components/Item.tsx
-var import_jsx_dev_runtime13 = require("react/jsx-dev-runtime");
+var import_LocalGroceryStore = __toESM(require("@mui/icons-material/LocalGroceryStore")), import_jsx_dev_runtime14 = require("react/jsx-dev-runtime");
 function Item({ item, onAction }) {
-  let deleteFetcher = (0, import_react9.useFetcher)(), handleActionClick = (action5) => () => {
-    if (action5 === "delete") {
+  let deleteFetcher = (0, import_react10.useFetcher)(), handleActionClick = (action6) => () => {
+    if (action6 === "delete") {
       if (!confirm(`Are you sure you want to delete ${item.name}?`))
         return;
       deleteFetcher.submit(null, {
@@ -964,34 +1099,34 @@ function Item({ item, onAction }) {
         action: `/items/${item.id}`
       });
     } else
-      action5 === "edit" && onAction(action5);
+      action6 === "edit" && onAction(action6);
   }, apiWorking = deleteFetcher.state === "submitting" || deleteFetcher.state === "loading";
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
-    import_material8.ListItem,
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(
+    import_material9.ListItem,
     {
       dense: !0,
       sx: { pr: "100px", opacity: apiWorking ? 0.5 : 1 },
-      secondaryAction: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.Stack, { direction: "row", justifyContent: "end", alignItems: "center", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.IconButton, { edge: "end", "aria-label": "delete", size: "small", onClick: handleActionClick("edit"), children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_Edit.default, {}, void 0, !1, {
+      secondaryAction: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.Stack, { direction: "row", justifyContent: "end", alignItems: "center", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.IconButton, { edge: "end", "aria-label": "delete", size: "small", onClick: handleActionClick("edit"), children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_Edit.default, {}, void 0, !1, {
           fileName: "app/components/Item.tsx",
-          lineNumber: 47,
+          lineNumber: 48,
           columnNumber: 13
         }, this) }, void 0, !1, {
           fileName: "app/components/Item.tsx",
-          lineNumber: 46,
+          lineNumber: 47,
           columnNumber: 11
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
-          import_material8.IconButton,
+        /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(
+          import_material9.IconButton,
           {
             edge: "end",
             "aria-label": "delete",
             size: "small",
             onClick: handleActionClick("delete"),
             disabled: !!apiWorking,
-            children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_Delete.default, {}, void 0, !1, {
+            children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_Delete.default, {}, void 0, !1, {
               fileName: "app/components/Item.tsx",
-              lineNumber: 56,
+              lineNumber: 57,
               columnNumber: 13
             }, this)
           },
@@ -999,89 +1134,89 @@ function Item({ item, onAction }) {
           !1,
           {
             fileName: "app/components/Item.tsx",
-            lineNumber: 54,
+            lineNumber: 55,
             columnNumber: 11
           },
           this
         )
       ] }, void 0, !0, {
         fileName: "app/components/Item.tsx",
-        lineNumber: 45,
+        lineNumber: 46,
         columnNumber: 9
       }, this),
       children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.ListItemAvatar, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_material8.Avatar, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_Inventory.default, { fontSize: "small" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.ListItemAvatar, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.Avatar, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_LocalGroceryStore.default, { fontSize: "small" }, void 0, !1, {
           fileName: "app/components/Item.tsx",
-          lineNumber: 63,
+          lineNumber: 64,
           columnNumber: 11
         }, this) }, void 0, !1, {
           fileName: "app/components/Item.tsx",
-          lineNumber: 62,
+          lineNumber: 63,
           columnNumber: 9
         }, this) }, void 0, !1, {
           fileName: "app/components/Item.tsx",
-          lineNumber: 61,
+          lineNumber: 62,
           columnNumber: 7
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
-          import_material8.ListItemText,
+        /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(
+          import_material9.ListItemText,
           {
             primaryTypographyProps: { ...ellipsis },
-            primary: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("span", { style: { ...ellipsisBlock }, children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_react9.Link, { to: `/items/${item.id}`, children: [
+            primary: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("span", { style: { ...ellipsisBlock }, children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react10.Link, { to: `/item/${item.id}`, children: [
                 item.name,
                 " - $",
                 item.price
               ] }, void 0, !0, {
                 fileName: "app/components/Item.tsx",
-                lineNumber: 70,
+                lineNumber: 71,
                 columnNumber: 13
               }, this),
               apiWorking && " (Deleting...)"
             ] }, void 0, !0, {
               fileName: "app/components/Item.tsx",
-              lineNumber: 69,
+              lineNumber: 70,
               columnNumber: 11
             }, this),
-            secondary: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("span", { style: { ...ellipsisBlock }, children: [
+            secondary: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("span", { style: { ...ellipsisBlock }, children: [
               "Created: ",
-              /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_remix_utils.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_jsx_dev_runtime13.Fragment, { children: "Loading..." }, void 0, !1, {
-                fileName: "app/components/Item.tsx",
-                lineNumber: 79,
-                columnNumber: 38
-              }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_DateDisplay.default, { date: item.dateAdded }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_remix_utils.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_jsx_dev_runtime14.Fragment, { children: "Loading..." }, void 0, !1, {
                 fileName: "app/components/Item.tsx",
                 lineNumber: 80,
+                columnNumber: 38
+              }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_DateDisplay.default, { date: item.dateAdded }, void 0, !1, {
+                fileName: "app/components/Item.tsx",
+                lineNumber: 81,
                 columnNumber: 24
               }, this) }, void 0, !1, {
                 fileName: "app/components/Item.tsx",
-                lineNumber: 79,
+                lineNumber: 80,
                 columnNumber: 15
               }, this),
-              item.updatedAt && item.updatedAt !== item.dateAdded && /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_jsx_dev_runtime13.Fragment, { children: [
+              item.updatedAt && item.updatedAt !== item.dateAdded && /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_jsx_dev_runtime14.Fragment, { children: [
                 "( updated:",
-                /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_remix_utils.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_jsx_dev_runtime13.Fragment, { children: "Loading..." }, void 0, !1, {
-                  fileName: "app/components/Item.tsx",
-                  lineNumber: 86,
-                  columnNumber: 40
-                }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_DateDisplay.default, { date: item.updatedAt }, void 0, !1, {
+                /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_remix_utils.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_jsx_dev_runtime14.Fragment, { children: "Loading..." }, void 0, !1, {
                   fileName: "app/components/Item.tsx",
                   lineNumber: 87,
+                  columnNumber: 40
+                }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_DateDisplay.default, { date: item.updatedAt }, void 0, !1, {
+                  fileName: "app/components/Item.tsx",
+                  lineNumber: 88,
                   columnNumber: 26
                 }, this) }, void 0, !1, {
                   fileName: "app/components/Item.tsx",
-                  lineNumber: 86,
+                  lineNumber: 87,
                   columnNumber: 17
                 }, this),
                 ")"
               ] }, void 0, !0, {
                 fileName: "app/components/Item.tsx",
-                lineNumber: 83,
+                lineNumber: 84,
                 columnNumber: 15
               }, this)
             ] }, void 0, !0, {
               fileName: "app/components/Item.tsx",
-              lineNumber: 77,
+              lineNumber: 78,
               columnNumber: 11
             }, this)
           },
@@ -1089,7 +1224,7 @@ function Item({ item, onAction }) {
           !1,
           {
             fileName: "app/components/Item.tsx",
-            lineNumber: 66,
+            lineNumber: 67,
             columnNumber: 7
           },
           this
@@ -1100,7 +1235,7 @@ function Item({ item, onAction }) {
     !0,
     {
       fileName: "app/components/Item.tsx",
-      lineNumber: 41,
+      lineNumber: 42,
       columnNumber: 5
     },
     this
@@ -1109,7 +1244,7 @@ function Item({ item, onAction }) {
 var Item_default = Item;
 
 // app/routes/_public._index.tsx
-var import_react11 = require("react"), import_Refresh = __toESM(require("@mui/icons-material/Refresh"));
+var import_react12 = require("react"), import_Refresh = __toESM(require("@mui/icons-material/Refresh")), import_Add = __toESM(require("@mui/icons-material/Add"));
 
 // app/api/items.server.ts
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
@@ -1186,14 +1321,14 @@ async function deleteItemById(id) {
 }
 
 // app/routes/_public._index.tsx
-var import_jsx_dev_runtime14 = require("react/jsx-dev-runtime"), meta = () => [
+var import_jsx_dev_runtime15 = require("react/jsx-dev-runtime"), meta = () => [
   { title: "Kevin's Cool Remix App" },
   { name: "description", content: "Welcome to Remix!" }
 ];
 function Index() {
-  let nav = (0, import_react10.useNavigate)(), data = (0, import_react10.useLoaderData)(), handleOnRefresh = () => {
+  let nav = (0, import_react11.useNavigate)(), data = (0, import_react11.useLoaderData)(), handleOnRefresh = () => {
     nav("./", { replace: !0 });
-  }, handleItemAction = (0, import_react11.useCallback)((item) => (actionId) => {
+  }, handleItemAction = (0, import_react12.useCallback)((item) => (actionId) => {
     switch (actionId) {
       case "edit": {
         nav(`/items/list/edit/${item.id}`, { state: { item } });
@@ -1202,63 +1337,74 @@ function Index() {
       case "delete":
         break;
     }
-  }, [nav]);
-  return data.length < 1 ? /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { children: [
+  }, [nav]), handleAdd = () => {
+  };
+  return data.length < 1 ? /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { children: [
     "Item list is empty! ",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react10.Link, { to: "add", children: "Add an item here.  " }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_react11.Link, { to: "add", children: "Add an item here.  " }, void 0, !1, {
       fileName: "app/routes/_public._index.tsx",
-      lineNumber: 41,
+      lineNumber: 46,
       columnNumber: 29
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/_public._index.tsx",
-    lineNumber: 40,
+    lineNumber: 45,
     columnNumber: 7
-  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.Stack, { direction: "column", justifyContent: "start", alignItems: "center", id: "item-list", width: "30rem", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.Stack, { direction: "row", justifyContent: "start", alignItems: "center", width: "100%", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.Typography, { width: "100%", textAlign: "start", children: [
+  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Stack, { direction: "column", justifyContent: "start", alignItems: "center", id: "item-list", width: "30rem", spacing: 2, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Stack, { direction: "row", justifyContent: "space-between", alignItems: "center", width: "100%", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Typography, { flexBasis: "35%", textAlign: "start", children: [
         data.length,
         " items available."
       ] }, void 0, !0, {
         fileName: "app/routes/_public._index.tsx",
-        lineNumber: 49,
+        lineNumber: 54,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.Button, { startIcon: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_Refresh.default, {}, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Stack, { direction: "row", justifyContent: "end", alignItems: "center", spacing: 1, children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Button, { startIcon: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_Add.default, {}, void 0, !1, {
+          fileName: "app/routes/_public._index.tsx",
+          lineNumber: 56,
+          columnNumber: 31
+        }, this), variant: "outlined", onClick: handleAdd, children: "New Item" }, void 0, !1, {
+          fileName: "app/routes/_public._index.tsx",
+          lineNumber: 56,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Button, { startIcon: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_Refresh.default, {}, void 0, !1, {
+          fileName: "app/routes/_public._index.tsx",
+          lineNumber: 59,
+          columnNumber: 31
+        }, this), variant: "outlined", onClick: handleOnRefresh, children: "Refresh" }, void 0, !1, {
+          fileName: "app/routes/_public._index.tsx",
+          lineNumber: 59,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, !0, {
         fileName: "app/routes/_public._index.tsx",
-        lineNumber: 50,
-        columnNumber: 29
-      }, this), variant: "outlined", onClick: handleOnRefresh, children: "Refresh" }, void 0, !1, {
-        fileName: "app/routes/_public._index.tsx",
-        lineNumber: 50,
+        lineNumber: 55,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/_public._index.tsx",
-      lineNumber: 48,
+      lineNumber: 53,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.Stack, { direction: "column", justifyContent: "start", alignItems: "center", width: "100%", spacing: 1, children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_material9.List, { dense: !0, sx: { width: "100%" }, children: data.map((res) => /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(Item_default, { item: res, onAction: handleItemAction(res) }, res.id, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Stack, { direction: "column", justifyContent: "start", alignItems: "center", width: "100%", spacing: 1, children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.List, { dense: !0, sx: { width: "100%" }, children: data.map((res) => /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(Item_default, { item: res, onAction: handleItemAction(res) }, res.id, !1, {
       fileName: "app/routes/_public._index.tsx",
-      lineNumber: 59,
+      lineNumber: 69,
       columnNumber: 17
     }, this)) }, void 0, !1, {
       fileName: "app/routes/_public._index.tsx",
-      lineNumber: 55,
+      lineNumber: 65,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/routes/_public._index.tsx",
-      lineNumber: 54,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react10.Outlet, {}, void 0, !1, {
-      fileName: "app/routes/_public._index.tsx",
-      lineNumber: 66,
+      lineNumber: 64,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/_public._index.tsx",
-    lineNumber: 47,
+    lineNumber: 52,
     columnNumber: 5
   }, this);
 }
@@ -1276,23 +1422,23 @@ __export(items_itemId_exports, {
   loader: () => loader3
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material10 = require("@mui/material"), import_node6 = require("@remix-run/node"), import_react12 = require("@remix-run/react");
-var import_jsx_dev_runtime15 = require("react/jsx-dev-runtime");
+var import_material11 = require("@mui/material"), import_node6 = require("@remix-run/node"), import_react13 = require("@remix-run/react");
+var import_jsx_dev_runtime16 = require("react/jsx-dev-runtime");
 function ItemDetail() {
-  let itemDetail = (0, import_react12.useLoaderData)(), params = (0, import_react12.useParams)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 3, width: "30rem", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Typography, { width: "100%", textAlign: "center", children: "Item Detail" }, void 0, !1, {
+  let itemDetail = (0, import_react13.useLoaderData)(), params = (0, import_react13.useParams)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 3, width: "30rem", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Typography, { width: "100%", textAlign: "center", children: "Item Detail" }, void 0, !1, {
       fileName: "app/routes/items.$itemId.tsx",
       lineNumber: 15,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Divider, { flexItem: !0, variant: "fullWidth" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Divider, { flexItem: !0, variant: "fullWidth" }, void 0, !1, {
       fileName: "app/routes/items.$itemId.tsx",
       lineNumber: 16,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 1, children: itemDetail ? /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_jsx_dev_runtime15.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Typography, { width: "100%", textAlign: "center", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 1, children: itemDetail ? /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_jsx_dev_runtime16.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Typography, { width: "100%", textAlign: "center", children: [
         "Name: ",
         itemDetail.name
       ] }, void 0, !0, {
@@ -1300,7 +1446,7 @@ function ItemDetail() {
         lineNumber: 21,
         columnNumber: 15
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Typography, { width: "100%", textAlign: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Typography, { width: "100%", textAlign: "center", children: [
         "Price: $",
         itemDetail.price
       ] }, void 0, !0, {
@@ -1312,7 +1458,7 @@ function ItemDetail() {
       fileName: "app/routes/items.$itemId.tsx",
       lineNumber: 20,
       columnNumber: 13
-    }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_jsx_dev_runtime15.Fragment, { children: [
+    }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_jsx_dev_runtime16.Fragment, { children: [
       "Did not find a item with the id: ",
       params.itemId
     ] }, void 0, !0, {
@@ -1343,14 +1489,14 @@ async function action2({ request, context, params }) {
   return params.itemId ? (await deleteItemById(params.itemId), (0, import_node6.json)({ deleted: !0 }, { status: 200, statusText: "OK" })) : (0, import_node6.redirect)("/items/list");
 }
 function ErrorBoundary() {
-  let error = (0, import_react12.useRouteError)();
-  return (0, import_react12.isRouteErrorResponse)(error) ? /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("h1", { children: "Oops" }, void 0, !1, {
+  let error = (0, import_react13.useRouteError)();
+  return (0, import_react13.isRouteErrorResponse)(error) ? /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("h1", { children: "Oops" }, void 0, !1, {
       fileName: "app/routes/items.$itemId.tsx",
       lineNumber: 57,
       columnNumber: 9
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("p", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("p", { children: [
       "Status: ",
       error.status,
       " - ",
@@ -1360,12 +1506,12 @@ function ErrorBoundary() {
       lineNumber: 58,
       columnNumber: 9
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("p", { children: error.data.message }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("p", { children: error.data.message }, void 0, !1, {
       fileName: "app/routes/items.$itemId.tsx",
       lineNumber: 59,
       columnNumber: 9
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_react12.Link, { to: "/items/list", children: "Back to Safely" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_react13.Link, { to: "/items/list", children: "Back to Safely" }, void 0, !1, {
       fileName: "app/routes/items.$itemId.tsx",
       lineNumber: 60,
       columnNumber: 9
@@ -1374,7 +1520,7 @@ function ErrorBoundary() {
     fileName: "app/routes/items.$itemId.tsx",
     lineNumber: 56,
     columnNumber: 7
-  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_material10.Stack, { children: "Error occured!" }, void 0, !1, {
+  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Stack, { children: "Error occured!" }, void 0, !1, {
     fileName: "app/routes/items.$itemId.tsx",
     lineNumber: 66,
     columnNumber: 5
@@ -1390,26 +1536,26 @@ __export(products_view_exports, {
   loader: () => loader4
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material11 = require("@mui/material"), import_react13 = require("@remix-run/react"), import_react14 = require("react");
-var import_node7 = require("@remix-run/node"), import_jsx_dev_runtime16 = require("react/jsx-dev-runtime");
+var import_material12 = require("@mui/material"), import_react14 = require("@remix-run/react"), import_react15 = require("react");
+var import_node7 = require("@remix-run/node"), import_jsx_dev_runtime17 = require("react/jsx-dev-runtime");
 function ProductsView() {
-  let transition = (0, import_react13.useNavigation)(), [open, setOpen] = (0, import_react14.useState)(!1), [searchParams, setSearchParams] = (0, import_react13.useSearchParams)(), data = (0, import_react13.useLoaderData)(), handleClickOpen = () => {
+  let transition = (0, import_react14.useNavigation)(), [open, setOpen] = (0, import_react15.useState)(!1), [searchParams, setSearchParams] = (0, import_react14.useSearchParams)(), data = (0, import_react14.useLoaderData)(), handleClickOpen = () => {
     setOpen(!0), setSearchParams({
       openCreateDialog: "true"
     });
   }, handleClose = () => {
     setOpen(!1), setSearchParams();
   };
-  return (0, import_react14.useEffect)(() => {
+  return (0, import_react15.useEffect)(() => {
     JSON.parse(searchParams.get("openCreateDialog") || "false") ? setOpen(!0) : setOpen(!1);
-  }, [searchParams]), /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 3, children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Stack, { direction: "row", justifyContent: "start", alignItems: "center", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { children: "View Products" }, void 0, !1, {
+  }, [searchParams]), /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_material12.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 3, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_material12.Stack, { direction: "row", justifyContent: "start", alignItems: "center", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { children: "View Products" }, void 0, !1, {
         fileName: "app/routes/products.view.tsx",
         lineNumber: 43,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Button, { variant: "outlined", onClick: handleClickOpen, children: transition.state === "submitting" ? "Creating..." : "Create" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_material12.Button, { variant: "outlined", onClick: handleClickOpen, children: transition.state === "submitting" ? "Creating..." : "Create" }, void 0, !1, {
         fileName: "app/routes/products.view.tsx",
         lineNumber: 46,
         columnNumber: 9
@@ -1419,12 +1565,12 @@ function ProductsView() {
       lineNumber: 42,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { children: "Data:" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { children: "Data:" }, void 0, !1, {
       fileName: "app/routes/products.view.tsx",
       lineNumber: 52,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 1, children: data.map((res) => /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_material12.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 1, children: data.map((res) => /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { children: [
       "Name: ",
       res.name,
       " | Price: ",
@@ -1440,7 +1586,7 @@ function ProductsView() {
       lineNumber: 55,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(DialogLayout_default, { open, title: "Add Product", onClose: handleClose, children: /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_material11.DialogContent, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(Products_default, { actionUrl: "/products/view" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(DialogLayout_default, { open, title: "Add Product", onClose: handleClose, children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_material12.DialogContent, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(Products_default, { actionUrl: "/products/view" }, void 0, !1, {
       fileName: "app/routes/products.view.tsx",
       lineNumber: 69,
       columnNumber: 11
@@ -1479,9 +1625,9 @@ __export(core_userId_exports, {
   default: () => core_userId_default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_jsx_dev_runtime17 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime18 = require("react/jsx-dev-runtime");
 function CoreUserDisplay() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { children: "Core User Profile:" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("div", { children: "Core User Profile:" }, void 0, !1, {
     fileName: "app/routes/core.$userId.tsx",
     lineNumber: 5,
     columnNumber: 5
@@ -1489,13 +1635,103 @@ function CoreUserDisplay() {
 }
 var core_userId_default = CoreUserDisplay;
 
-// app/routes/items._index.tsx
-var items_index_exports = {};
-__export(items_index_exports, {
+// app/routes/item.$itemId.tsx
+var item_itemId_exports = {};
+__export(item_itemId_exports, {
+  action: () => action4,
+  default: () => item_itemId_default,
   loader: () => loader5
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_node8 = require("@remix-run/node"), loader5 = async ({ request }) => (0, import_node8.redirect)("/items/list");
+var import_material13 = require("@mui/material"), import_node8 = require("@remix-run/node"), import_react16 = require("@remix-run/react");
+var import_jsx_dev_runtime19 = require("react/jsx-dev-runtime");
+function ItemDetail2() {
+  let itemDetail = (0, import_react16.useLoaderData)(), params = (0, import_react16.useParams)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_material13.Stack, { direction: "column", justifyContent: "start", alignItems: "start", spacing: 3, width: "30rem", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_material13.Typography, { width: "100%", textAlign: "center", children: "Item Detail" }, void 0, !1, {
+      fileName: "app/routes/item.$itemId.tsx",
+      lineNumber: 15,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_material13.Divider, { flexItem: !0, variant: "fullWidth" }, void 0, !1, {
+      fileName: "app/routes/item.$itemId.tsx",
+      lineNumber: 16,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_material13.Stack, { direction: "column", justifyContent: "start", alignItems: "start", width: "100%", spacing: 1, children: itemDetail ? /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_jsx_dev_runtime19.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_material13.Typography, { width: "100%", textAlign: "center", children: [
+        "Name: ",
+        itemDetail.name
+      ] }, void 0, !0, {
+        fileName: "app/routes/item.$itemId.tsx",
+        lineNumber: 21,
+        columnNumber: 15
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_material13.Typography, { width: "100%", textAlign: "center", children: [
+        "Price: $",
+        itemDetail.price
+      ] }, void 0, !0, {
+        fileName: "app/routes/item.$itemId.tsx",
+        lineNumber: 22,
+        columnNumber: 15
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/item.$itemId.tsx",
+      lineNumber: 20,
+      columnNumber: 13
+    }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_jsx_dev_runtime19.Fragment, { children: [
+      "Did not find a item with the id: ",
+      params.itemId
+    ] }, void 0, !0, {
+      fileName: "app/routes/item.$itemId.tsx",
+      lineNumber: 24,
+      columnNumber: 16
+    }, this) }, void 0, !1, {
+      fileName: "app/routes/item.$itemId.tsx",
+      lineNumber: 17,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_react16.Outlet, {}, void 0, !1, {
+      fileName: "app/routes/item.$itemId.tsx",
+      lineNumber: 27,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/item.$itemId.tsx",
+    lineNumber: 14,
+    columnNumber: 5
+  }, this);
+}
+async function loader5({ request, params, context }) {
+  let itemId = params.itemId, itemDetail = await getItemById(itemId).catch((err) => {
+    throw (0, import_node8.json)(
+      { invalid: itemId, message: `Sorry~! Could not find an Item with the provided ID. ${JSON.stringify(err)}` },
+      { status: 500, statusText: "Internal Server Error" }
+    );
+  });
+  return (0, import_node8.json)(itemDetail);
+}
+async function action4({ request, context, params }) {
+  let body = await request.formData(), intent = body.get("intent");
+  if (request.method === "DELETE" && !intent)
+    return await deleteItemById(params.itemId), (0, import_node8.redirect)("/");
+  if (intent === "delete")
+    return await deleteItemById(body.get("id")), (0, import_node8.json)({ deleted: !0 }, { status: 200, statusText: "OK" });
+  if (intent === "update")
+    return await updateItemById(body.get("id"), {
+      name: body.get("name"),
+      price: +(body.get("price") ?? -1)
+    }), (0, import_node8.redirect)(`/item/${body.get("id")}`);
+}
+var item_itemId_default = ItemDetail2;
+
+// app/routes/items._index.tsx
+var items_index_exports = {};
+__export(items_index_exports, {
+  loader: () => loader6
+});
+init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
+var import_node9 = require("@remix-run/node"), loader6 = async ({ request }) => (0, import_node9.redirect)("/items/list");
 
 // app/routes/_public.team.tsx
 var public_team_exports = {};
@@ -1503,9 +1739,9 @@ __export(public_team_exports, {
   default: () => Team
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_jsx_dev_runtime18 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime20 = require("react/jsx-dev-runtime");
 function Team() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("div", { children: "Meet the team." }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime20.jsxDEV)("div", { children: "Meet the team." }, void 0, !1, {
     fileName: "app/routes/_public.team.tsx",
     lineNumber: 4,
     columnNumber: 5
@@ -1518,12 +1754,12 @@ __export(core_level1_exports, {
   default: () => core_level1_default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_react15 = require("@remix-run/react"), import_jsx_dev_runtime19 = require("react/jsx-dev-runtime");
+var import_react17 = require("@remix-run/react"), import_jsx_dev_runtime21 = require("react/jsx-dev-runtime");
 function CoreLevel1() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)("div", { children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)("div", { children: [
       "Welcome to ",
-      /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_react15.Link, { to: "/core/level1", children: "Level 1" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)(import_react17.Link, { to: "/core/level1", children: "Level 1" }, void 0, !1, {
         fileName: "app/routes/core.level1.tsx",
         lineNumber: 8,
         columnNumber: 20
@@ -1534,18 +1770,18 @@ function CoreLevel1() {
       lineNumber: 7,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)("div", { style: { marginBottom: "20px" }, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_react15.Link, { prefetch: "intent", to: "./bekah", children: "Bekah" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)("div", { style: { marginBottom: "20px" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)(import_react17.Link, { prefetch: "intent", to: "./bekah", children: "Bekah" }, void 0, !1, {
         fileName: "app/routes/core.level1.tsx",
         lineNumber: 12,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_react15.Link, { prefetch: "intent", to: "./joe", children: "Joe" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)(import_react17.Link, { prefetch: "intent", to: "./joe", children: "Joe" }, void 0, !1, {
         fileName: "app/routes/core.level1.tsx",
         lineNumber: 13,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_react15.Link, { prefetch: "intent", to: "./jack", children: "Jack" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)(import_react17.Link, { prefetch: "intent", to: "./jack", children: "Jack" }, void 0, !1, {
         fileName: "app/routes/core.level1.tsx",
         lineNumber: 14,
         columnNumber: 9
@@ -1555,7 +1791,7 @@ function CoreLevel1() {
       lineNumber: 11,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime19.jsxDEV)(import_react15.Outlet, {}, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)(import_react17.Outlet, {}, void 0, !1, {
       fileName: "app/routes/core.level1.tsx",
       lineNumber: 16,
       columnNumber: 7
@@ -1574,9 +1810,9 @@ __export(core_index_exports, {
   default: () => core_index_default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_jsx_dev_runtime20 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime");
 function CoreIndex() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime20.jsxDEV)("div", { children: "Core users can be viewed here. (Core Index)" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("div", { children: "Core users can be viewed here. (Core Index)" }, void 0, !1, {
     fileName: "app/routes/core._index.tsx",
     lineNumber: 4,
     columnNumber: 5
@@ -1591,12 +1827,12 @@ __export(auth_login_exports, {
   meta: () => meta2
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_jsx_dev_runtime21 = require("react/jsx-dev-runtime"), meta2 = () => [
+var import_jsx_dev_runtime23 = require("react/jsx-dev-runtime"), meta2 = () => [
   { title: "Login | Remix App" },
   { name: "description", content: "Welcome to Remix!" }
 ];
 function AuthLogin() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime21.jsxDEV)("div", { children: "Log in here." }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)("div", { children: "Log in here." }, void 0, !1, {
     fileName: "app/routes/_auth.login.tsx",
     lineNumber: 13,
     columnNumber: 5
@@ -1614,29 +1850,29 @@ var import_remix_utils2 = require("remix-utils"), import_BrokenOnServer = __toES
 
 // app/components/ComplexComponent.tsx
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_react16 = require("react"), import_jsx_dev_runtime22 = require("react/jsx-dev-runtime");
+var import_react18 = require("react"), import_jsx_dev_runtime24 = require("react/jsx-dev-runtime");
 function ComplexComponent() {
-  let [count, setCount] = (0, import_react16.useState)(() => {
+  let [count, setCount] = (0, import_react18.useState)(() => {
     let stored = localStorage.getItem("count");
     return stored ? JSON.parse(stored) : 0;
   });
-  return (0, import_react16.useEffect)(
+  return (0, import_react18.useEffect)(
     function() {
       localStorage.setItem("count", JSON.stringify(count));
     },
     [count]
-  ), /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)(import_jsx_dev_runtime22.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("button", { onClick: () => setCount((c) => c - 1), children: "-" }, void 0, !1, {
+  ), /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_jsx_dev_runtime24.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)("button", { onClick: () => setCount((c) => c - 1), children: "-" }, void 0, !1, {
       fileName: "app/components/ComplexComponent.tsx",
       lineNumber: 19,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("span", { children: count }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)("span", { children: count }, void 0, !1, {
       fileName: "app/components/ComplexComponent.tsx",
       lineNumber: 20,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("button", { onClick: () => setCount((c) => c + 1), children: "+" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)("button", { onClick: () => setCount((c) => c + 1), children: "+" }, void 0, !1, {
       fileName: "app/components/ComplexComponent.tsx",
       lineNumber: 21,
       columnNumber: 7
@@ -1649,15 +1885,15 @@ function ComplexComponent() {
 }
 
 // app/routes/clientonly.tsx
-var import_jsx_dev_runtime23 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime25 = require("react/jsx-dev-runtime");
 function Screen() {
   let hydrated = (0, import_remix_utils2.useHydrated)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(import_jsx_dev_runtime23.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(import_remix_utils2.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(import_jsx_dev_runtime23.Fragment, { children: "Loading..." }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_jsx_dev_runtime25.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_remix_utils2.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_jsx_dev_runtime25.Fragment, { children: "Loading..." }, void 0, !1, {
       fileName: "app/routes/clientonly.tsx",
       lineNumber: 10,
       columnNumber: 30
-    }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(import_BrokenOnServer.BrokenOnTheServer, {}, void 0, !1, {
+    }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_BrokenOnServer.BrokenOnTheServer, {}, void 0, !1, {
       fileName: "app/routes/clientonly.tsx",
       lineNumber: 11,
       columnNumber: 16
@@ -1666,11 +1902,11 @@ function Screen() {
       lineNumber: 10,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(import_remix_utils2.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(import_jsx_dev_runtime23.Fragment, { children: "Loading..." }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_remix_utils2.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_jsx_dev_runtime25.Fragment, { children: "Loading..." }, void 0, !1, {
       fileName: "app/routes/clientonly.tsx",
       lineNumber: 14,
       columnNumber: 30
-    }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(ComplexComponent, {}, void 0, !1, {
+    }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(ComplexComponent, {}, void 0, !1, {
       fileName: "app/routes/clientonly.tsx",
       lineNumber: 15,
       columnNumber: 16
@@ -1679,7 +1915,7 @@ function Screen() {
       lineNumber: 14,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime23.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(
       "button",
       {
         type: "button",
@@ -1706,19 +1942,19 @@ function Screen() {
 // app/routes/items.list.tsx
 var items_list_exports = {};
 __export(items_list_exports, {
-  action: () => action4,
+  action: () => action5,
   default: () => items_list_default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material12 = require("@mui/material"), import_react17 = require("@remix-run/react");
-var import_node9 = require("@remix-run/node");
-var import_react18 = require("react"), import_Refresh2 = __toESM(require("@mui/icons-material/Refresh")), import_jsx_dev_runtime24 = require("react/jsx-dev-runtime");
+var import_material14 = require("@mui/material"), import_react19 = require("@remix-run/react");
+var import_node10 = require("@remix-run/node");
+var import_react20 = require("react"), import_Refresh2 = __toESM(require("@mui/icons-material/Refresh")), import_jsx_dev_runtime26 = require("react/jsx-dev-runtime");
 function ItemsView() {
-  let data = (0, import_react17.useRouteLoaderData)("routes/items"), nav = (0, import_react17.useNavigate)(), fetcher = (0, import_react17.useFetcher)(), handleOnRefresh = () => {
+  let data = (0, import_react19.useRouteLoaderData)("routes/items"), nav = (0, import_react19.useNavigate)(), fetcher = (0, import_react19.useFetcher)(), handleOnRefresh = () => {
     nav("./", {
       replace: !0
     });
-  }, handleItemAction = (0, import_react18.useCallback)((item) => (actionId) => {
+  }, handleItemAction = (0, import_react20.useCallback)((item) => (actionId) => {
     switch (actionId) {
       case "edit": {
         nav(`/items/list/edit/${item.id}`, { state: { item } });
@@ -1728,9 +1964,9 @@ function ItemsView() {
         break;
     }
   }, [nav]);
-  return data.length < 1 ? /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)("div", { children: [
+  return data.length < 1 ? /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)("div", { children: [
     "Item list is empty! ",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_react17.Link, { to: "add", children: "Add an item here.  " }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_react19.Link, { to: "add", children: "Add an item here.  " }, void 0, !1, {
       fileName: "app/routes/items.list.tsx",
       lineNumber: 40,
       columnNumber: 29
@@ -1739,9 +1975,9 @@ function ItemsView() {
     fileName: "app/routes/items.list.tsx",
     lineNumber: 39,
     columnNumber: 7
-  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_material12.Stack, { direction: "column", justifyContent: "start", alignItems: "center", id: "item-list", width: "30rem", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_material12.Stack, { direction: "row", justifyContent: "start", alignItems: "center", width: "100%", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_material12.Typography, { width: "100%", textAlign: "start", children: [
+  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_material14.Stack, { direction: "column", justifyContent: "start", alignItems: "center", id: "item-list", width: "30rem", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_material14.Stack, { direction: "row", justifyContent: "start", alignItems: "center", width: "100%", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_material14.Typography, { width: "100%", textAlign: "start", children: [
         data.length,
         " items available."
       ] }, void 0, !0, {
@@ -1749,7 +1985,7 @@ function ItemsView() {
         lineNumber: 48,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_material12.Button, { startIcon: /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_Refresh2.default, {}, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_material14.Button, { startIcon: /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_Refresh2.default, {}, void 0, !1, {
         fileName: "app/routes/items.list.tsx",
         lineNumber: 49,
         columnNumber: 29
@@ -1763,7 +1999,7 @@ function ItemsView() {
       lineNumber: 47,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_material12.Stack, { direction: "column", justifyContent: "start", alignItems: "center", width: "100%", spacing: 1, children: /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_material12.List, { dense: !0, sx: { width: "100%" }, children: data.map((res) => /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(Item_default, { item: res, onAction: handleItemAction(res) }, res.id, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_material14.Stack, { direction: "column", justifyContent: "start", alignItems: "center", width: "100%", spacing: 1, children: /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_material14.List, { dense: !0, sx: { width: "100%" }, children: data.map((res) => /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(Item_default, { item: res, onAction: handleItemAction(res) }, res.id, !1, {
       fileName: "app/routes/items.list.tsx",
       lineNumber: 58,
       columnNumber: 17
@@ -1776,7 +2012,7 @@ function ItemsView() {
       lineNumber: 53,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime24.jsxDEV)(import_react17.Outlet, {}, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)(import_react19.Outlet, {}, void 0, !1, {
       fileName: "app/routes/items.list.tsx",
       lineNumber: 65,
       columnNumber: 7
@@ -1788,15 +2024,15 @@ function ItemsView() {
   }, this);
 }
 var items_list_default = ItemsView;
-async function action4({ request, context, params }) {
-  let body = await request.formData(), intent = body.get("intent"), result, action5 = "create";
-  return intent === "delete" && (result = await deleteItemById(body.get("id")), action5 = "delete"), intent === "update" && (result = await updateItemById(body.get("id"), {
+async function action5({ request, context, params }) {
+  let body = await request.formData(), intent = body.get("intent"), result, action6 = "create";
+  return intent === "delete" && (result = await deleteItemById(body.get("id")), action6 = "delete"), intent === "update" && (result = await updateItemById(body.get("id"), {
     name: body.get("name"),
     price: +(body.get("price") ?? -1)
-  }), action5 = "update"), intent === null && (result = await addItem({
+  }), action6 = "update"), intent === null && (result = await addItem({
     name: body.get("name"),
     price: +(body.get("price") ?? -1)
-  })), (0, import_node9.redirect)(`/items/list?${action5}=${body.get("name")}`);
+  })), (0, import_node10.redirect)(`/items/list?${action6}=${body.get("name")}`);
 }
 
 // app/routes/Products.tsx
@@ -1806,7 +2042,7 @@ __export(Products_exports, {
   meta: () => meta3
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material13 = require("@mui/material"), import_react19 = require("@remix-run/react");
+var import_material15 = require("@mui/material"), import_react21 = require("@remix-run/react");
 
 // app/models/products.model.ts
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
@@ -1824,13 +2060,13 @@ var navOptions2 = [
 ];
 
 // app/routes/Products.tsx
-var import_jsx_dev_runtime25 = require("react/jsx-dev-runtime"), meta3 = (res) => [
+var import_jsx_dev_runtime27 = require("react/jsx-dev-runtime"), meta3 = (res) => [
   { title: "Products" },
   { name: "description", content: "Welcome to Products!" }
 ];
 function Products2() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_material13.Stack, { direction: "column", justifyContent: "start", alignItems: "start", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_material13.Stack, { direction: "row", justifyContent: "start", alignItems: "center", spacing: 2, my: 3, children: navOptions2.map((navItem) => /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_react19.NavLink, { to: navItem.path, children: navItem.displayName }, navItem.id, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(import_material15.Stack, { direction: "column", justifyContent: "start", alignItems: "start", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(import_material15.Stack, { direction: "row", justifyContent: "start", alignItems: "center", spacing: 2, my: 3, children: navOptions2.map((navItem) => /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(import_react21.NavLink, { to: navItem.path, children: navItem.displayName }, navItem.id, !1, {
       fileName: "app/routes/Products.tsx",
       lineNumber: 31,
       columnNumber: 15
@@ -1839,7 +2075,7 @@ function Products2() {
       lineNumber: 27,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime25.jsxDEV)(import_react19.Outlet, {}, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)(import_react21.Outlet, {}, void 0, !1, {
       fileName: "app/routes/Products.tsx",
       lineNumber: 37,
       columnNumber: 7
@@ -1858,9 +2094,9 @@ __export(items_exports, {
   default: () => items_default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_jsx_dev_runtime26 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime28 = require("react/jsx-dev-runtime");
 function ItemsAnyMatchRoute() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime26.jsxDEV)("div", { children: "404 in Items" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime28.jsxDEV)("div", { children: "404 in Items" }, void 0, !1, {
     fileName: "app/routes/items.$.tsx",
     lineNumber: 4,
     columnNumber: 5
@@ -1874,9 +2110,9 @@ __export(about_exports, {
   default: () => about_default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_jsx_dev_runtime27 = require("react/jsx-dev-runtime");
+var import_jsx_dev_runtime29 = require("react/jsx-dev-runtime");
 function About() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime27.jsxDEV)("div", { children: "ABOUT!!!" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { children: "ABOUT!!!" }, void 0, !1, {
     fileName: "app/routes/about.tsx",
     lineNumber: 4,
     columnNumber: 5
@@ -1889,13 +2125,13 @@ var items_exports2 = {};
 __export(items_exports2, {
   default: () => items_default2,
   headers: () => headers,
-  loader: () => loader6,
+  loader: () => loader7,
   meta: () => meta4,
   navOptions: () => navOptions3
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material14 = require("@mui/material"), import_react20 = require("@remix-run/react");
-var import_node10 = require("@remix-run/node"), import_jsx_dev_runtime28 = require("react/jsx-dev-runtime"), meta4 = (res) => [
+var import_material16 = require("@mui/material"), import_react22 = require("@remix-run/react");
+var import_node11 = require("@remix-run/node"), import_jsx_dev_runtime30 = require("react/jsx-dev-runtime"), meta4 = (res) => [
   { title: "Items" },
   { name: "description", content: "Welcome to Items!" }
 ], navOptions3 = [
@@ -1916,8 +2152,8 @@ var import_node10 = require("@remix-run/node"), import_jsx_dev_runtime28 = requi
   }
 ];
 function Items() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime28.jsxDEV)(import_material14.Stack, { direction: "column", justifyContent: "start", alignItems: "center", width: "100%", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime28.jsxDEV)(import_material14.Stack, { direction: "row", justifyContent: "center", alignItems: "center", spacing: 2, my: 3, children: navOptions3.map((navItem) => /* @__PURE__ */ (0, import_jsx_dev_runtime28.jsxDEV)(import_react20.NavLink, { prefetch: "none", to: navItem.path, children: navItem.displayName }, navItem.id, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime30.jsxDEV)(import_material16.Stack, { direction: "column", justifyContent: "start", alignItems: "center", width: "100%", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime30.jsxDEV)(import_material16.Stack, { direction: "row", justifyContent: "center", alignItems: "center", spacing: 2, my: 3, children: navOptions3.map((navItem) => /* @__PURE__ */ (0, import_jsx_dev_runtime30.jsxDEV)(import_react22.NavLink, { prefetch: "none", to: navItem.path, children: navItem.displayName }, navItem.id, !1, {
       fileName: "app/routes/items.tsx",
       lineNumber: 43,
       columnNumber: 15
@@ -1926,7 +2162,7 @@ function Items() {
       lineNumber: 39,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime28.jsxDEV)(import_react20.Outlet, {}, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime30.jsxDEV)(import_react22.Outlet, {}, void 0, !1, {
       fileName: "app/routes/items.tsx",
       lineNumber: 50,
       columnNumber: 7
@@ -1942,9 +2178,9 @@ var headers = ({
 }) => ({
   "Cache-Control": loaderHeaders.get("Cache-Control")
 });
-async function loader6() {
+async function loader7() {
   let result = await getAllItems();
-  return (0, import_node10.json)(result);
+  return (0, import_node11.json)(result);
 }
 var items_default2 = Items;
 
@@ -1955,14 +2191,14 @@ __export(core_exports, {
   meta: () => meta5
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_material15 = require("@mui/material"), import_react21 = require("@remix-run/react"), import_jsx_dev_runtime29 = require("react/jsx-dev-runtime"), meta5 = (res) => [
+var import_material17 = require("@mui/material"), import_react23 = require("@remix-run/react"), import_jsx_dev_runtime31 = require("react/jsx-dev-runtime"), meta5 = (res) => [
   { title: "Core" },
   { name: "description", content: "Welcome to Remix!" }
 ];
 function Core() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_material15.Stack, { direction: "column", justifyContent: "start", alignItems: "start", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { style: { marginTop: "30px" }, className: "cool-font", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_react21.Link, { to: "/core", children: "Core" }, void 0, !1, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)(import_material17.Stack, { direction: "column", justifyContent: "start", alignItems: "start", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)("div", { style: { marginTop: "30px" }, className: "cool-font", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)(import_react23.Link, { to: "/core", children: "Core" }, void 0, !1, {
         fileName: "app/routes/core.tsx",
         lineNumber: 21,
         columnNumber: 9
@@ -1973,23 +2209,23 @@ function Core() {
       lineNumber: 20,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_react21.Link, { to: "./john", children: "John" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)(import_react23.Link, { to: "./john", children: "John" }, void 0, !1, {
         fileName: "app/routes/core.tsx",
         lineNumber: 24,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_react21.Link, { to: "./lucy", children: "Lucy" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)(import_react23.Link, { to: "./lucy", children: "Lucy" }, void 0, !1, {
         fileName: "app/routes/core.tsx",
         lineNumber: 25,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_react21.Link, { to: "./kevin", children: "Kevin" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)(import_react23.Link, { to: "./kevin", children: "Kevin" }, void 0, !1, {
         fileName: "app/routes/core.tsx",
         lineNumber: 26,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_react21.Link, { to: "./level1", children: "Go to Core Level 1 Users" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)(import_react23.Link, { to: "./level1", children: "Go to Core Level 1 Users" }, void 0, !1, {
         fileName: "app/routes/core.tsx",
         lineNumber: 27,
         columnNumber: 9
@@ -1999,7 +2235,7 @@ function Core() {
       lineNumber: 23,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { style: { marginTop: "20px" }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_react21.Outlet, {}, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)("div", { style: { marginTop: "20px" }, children: /* @__PURE__ */ (0, import_jsx_dev_runtime31.jsxDEV)(import_react23.Outlet, {}, void 0, !1, {
       fileName: "app/routes/core.tsx",
       lineNumber: 31,
       columnNumber: 9
@@ -2016,17 +2252,120 @@ function Core() {
 }
 var core_default = Core;
 
+// app/routes/item.tsx
+var item_exports = {};
+__export(item_exports, {
+  ErrorBoundary: () => ErrorBoundary2,
+  default: () => item_default
+});
+init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
+var import_Edit2 = __toESM(require("@mui/icons-material/Edit")), import_Delete2 = __toESM(require("@mui/icons-material/Delete")), import_material18 = require("@mui/material"), import_react24 = require("@remix-run/react"), import_jsx_dev_runtime32 = require("react/jsx-dev-runtime");
+function Item2() {
+  let deleteFetcher = (0, import_react24.useFetcher)(), { itemId } = (0, import_react24.useParams)(), handleDelete = () => {
+    confirm("Are you sure you want to delete this item?") && deleteFetcher.submit(null, {
+      method: "delete",
+      action: `/item/${itemId}`
+    });
+  };
+  return itemId ? /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_material18.Stack, { direction: "column", justifyContent: "start", alignItems: "center", spacing: 3, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_material18.Stack, { direction: "row", justifyContent: "start", alignItems: "center", width: "100%", sx: { bgcolor: "#ebeec6" }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_react24.Link, { to: `./${itemId}/edit`, replace: !0, children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_material18.Button, { startIcon: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_Edit2.default, {}, void 0, !1, {
+        fileName: "app/routes/item.tsx",
+        lineNumber: 27,
+        columnNumber: 31
+      }, this), children: "Edit" }, void 0, !1, {
+        fileName: "app/routes/item.tsx",
+        lineNumber: 27,
+        columnNumber: 11
+      }, this) }, void 0, !1, {
+        fileName: "app/routes/item.tsx",
+        lineNumber: 26,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_material18.Button, { startIcon: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_Delete2.default, {}, void 0, !1, {
+        fileName: "app/routes/item.tsx",
+        lineNumber: 31,
+        columnNumber: 29
+      }, this), onClick: handleDelete, name: "intent", value: "delete", children: "Delete" }, void 0, !1, {
+        fileName: "app/routes/item.tsx",
+        lineNumber: 31,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/item.tsx",
+      lineNumber: 25,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_material18.Stack, { direction: "column", justifyContent: "start", alignItems: "center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_react24.Outlet, {}, void 0, !1, {
+      fileName: "app/routes/item.tsx",
+      lineNumber: 37,
+      columnNumber: 9
+    }, this) }, void 0, !1, {
+      fileName: "app/routes/item.tsx",
+      lineNumber: 36,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/item.tsx",
+    lineNumber: 24,
+    columnNumber: 5
+  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { children: "No ID provided." }, void 0, !1, {
+    fileName: "app/routes/item.tsx",
+    lineNumber: 21,
+    columnNumber: 23
+  }, this);
+}
+function ErrorBoundary2() {
+  let error = (0, import_react24.useRouteError)();
+  return (0, import_react24.isRouteErrorResponse)(error) ? /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("h1", { children: "Oops" }, void 0, !1, {
+      fileName: "app/routes/item.tsx",
+      lineNumber: 49,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("p", { children: [
+      "Status: ",
+      error.status,
+      " - ",
+      error.statusText
+    ] }, void 0, !0, {
+      fileName: "app/routes/item.tsx",
+      lineNumber: 50,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)("p", { children: error.data.message }, void 0, !1, {
+      fileName: "app/routes/item.tsx",
+      lineNumber: 51,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_react24.Link, { to: "/", children: "Back to Home" }, void 0, !1, {
+      fileName: "app/routes/item.tsx",
+      lineNumber: 52,
+      columnNumber: 9
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/item.tsx",
+    lineNumber: 48,
+    columnNumber: 7
+  }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime32.jsxDEV)(import_material18.Stack, { children: "Error occured!" }, void 0, !1, {
+    fileName: "app/routes/item.tsx",
+    lineNumber: 58,
+    columnNumber: 5
+  }, this);
+}
+var item_default = Item2;
+
 // app/routes/$.tsx
 var __exports = {};
 __export(__exports, {
   default: () => __default
 });
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var import_react22 = require("@remix-run/react"), import_jsx_dev_runtime30 = require("react/jsx-dev-runtime");
+var import_react25 = require("@remix-run/react"), import_jsx_dev_runtime33 = require("react/jsx-dev-runtime");
 function NotFound404() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime30.jsxDEV)("div", { children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime33.jsxDEV)("div", { children: [
     "Page not found - 404!",
-    /* @__PURE__ */ (0, import_jsx_dev_runtime30.jsxDEV)(import_react22.Link, { to: "/", children: "Go Home" }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime33.jsxDEV)(import_react25.Link, { to: "/", children: "Go Home" }, void 0, !1, {
       fileName: "app/routes/$.tsx",
       lineNumber: 8,
       columnNumber: 7
@@ -2041,7 +2380,7 @@ var __default = NotFound404;
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
 init_define_process_env_REMIX_DEV_HTTP_ORIGIN();
-var assets_manifest_default = { entry: { module: "/build/entry.client-B7XRMBEK.js", imports: ["/build/_shared/chunk-ZWGWGGVF.js", "/build/_shared/chunk-GIAAE3CH.js", "/build/_shared/chunk-PI7TTO4D.js", "/build/_shared/chunk-NMZL6IDN.js", "/build/_shared/chunk-A6HGE4TO.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-BOXFZXVX.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-XXSYNVYJ.js", imports: ["/build/_shared/chunk-GA656LDU.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/$": { id: "routes/$", parentId: "root", path: "*", index: void 0, caseSensitive: void 0, module: "/build/routes/$-RWZJLIW3.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/Products": { id: "routes/Products", parentId: "root", path: "Products", index: void 0, caseSensitive: void 0, module: "/build/routes/Products-KWE3TVTP.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/_auth.login-3NYIHKGD.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_public._index": { id: "routes/_public._index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_public._index-FOAMPC7U.js", imports: ["/build/_shared/chunk-ENNPITFR.js", "/build/_shared/chunk-3WTIG3VJ.js", "/build/_shared/chunk-NCNOPK2L.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_public.team": { id: "routes/_public.team", parentId: "root", path: "team", index: void 0, caseSensitive: void 0, module: "/build/routes/_public.team-BDCHECJG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/about": { id: "routes/about", parentId: "root", path: "about", index: void 0, caseSensitive: void 0, module: "/build/routes/about-DQNGQDSC.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/clientonly": { id: "routes/clientonly", parentId: "root", path: "clientonly", index: void 0, caseSensitive: void 0, module: "/build/routes/clientonly-QLD3P3X4.js", imports: ["/build/_shared/chunk-3WTIG3VJ.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core": { id: "routes/core", parentId: "root", path: "core", index: void 0, caseSensitive: void 0, module: "/build/routes/core-D4D7BBMS.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core.$userId": { id: "routes/core.$userId", parentId: "routes/core", path: ":userId", index: void 0, caseSensitive: void 0, module: "/build/routes/core.$userId-NQOGOJWM.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core._index": { id: "routes/core._index", parentId: "routes/core", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/core._index-ELMUQEPG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core.level1": { id: "routes/core.level1", parentId: "routes/core", path: "level1", index: void 0, caseSensitive: void 0, module: "/build/routes/core.level1-ODXHU76T.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core.level1.$userId": { id: "routes/core.level1.$userId", parentId: "routes/core.level1", path: ":userId", index: void 0, caseSensitive: void 0, module: "/build/routes/core.level1.$userId-NA6MT5LQ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core.level1._index": { id: "routes/core.level1._index", parentId: "routes/core.level1", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/core.level1._index-7FUOQ2TU.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items": { id: "routes/items", parentId: "root", path: "items", index: void 0, caseSensitive: void 0, module: "/build/routes/items-7N2QR7VA.js", imports: ["/build/_shared/chunk-NCNOPK2L.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.$": { id: "routes/items.$", parentId: "routes/items", path: "*", index: void 0, caseSensitive: void 0, module: "/build/routes/items.$-L572APD7.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.$itemId": { id: "routes/items.$itemId", parentId: "routes/items", path: ":itemId", index: void 0, caseSensitive: void 0, module: "/build/routes/items.$itemId-YFCEGHTO.js", imports: ["/build/_shared/chunk-GA656LDU.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/items._index": { id: "routes/items._index", parentId: "routes/items", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/items._index-AXFF5QR3.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.list": { id: "routes/items.list", parentId: "routes/items", path: "list", index: void 0, caseSensitive: void 0, module: "/build/routes/items.list-VFST7NIL.js", imports: ["/build/_shared/chunk-ENNPITFR.js", "/build/_shared/chunk-3WTIG3VJ.js", "/build/_shared/chunk-GA656LDU.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.list.add": { id: "routes/items.list.add", parentId: "routes/items.list", path: "add", index: void 0, caseSensitive: void 0, module: "/build/routes/items.list.add-LCDC2IL7.js", imports: ["/build/_shared/chunk-3PITPM7P.js", "/build/_shared/chunk-ZYJH4E7X.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.list.edit.$itemId": { id: "routes/items.list.edit.$itemId", parentId: "routes/items.list", path: "edit/:itemId", index: void 0, caseSensitive: void 0, module: "/build/routes/items.list.edit.$itemId-3GZXXVHC.js", imports: ["/build/_shared/chunk-3PITPM7P.js", "/build/_shared/chunk-ZYJH4E7X.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products._index": { id: "routes/products._index", parentId: "root", path: "products", index: !0, caseSensitive: void 0, module: "/build/routes/products._index-JIJRLXHL.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products.add-new": { id: "routes/products.add-new", parentId: "root", path: "products/add-new", index: void 0, caseSensitive: void 0, module: "/build/routes/products.add-new-UMUVGY6A.js", imports: ["/build/_shared/chunk-CU6AMO3N.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-ZYJH4E7X.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products.view": { id: "routes/products.view", parentId: "root", path: "products/view", index: void 0, caseSensitive: void 0, module: "/build/routes/products.view-X5FKZLMM.js", imports: ["/build/_shared/chunk-CU6AMO3N.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-3PITPM7P.js", "/build/_shared/chunk-ZYJH4E7X.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "ba5558fa", hmr: { runtime: "/build/_shared\\chunk-A6HGE4TO.js", timestamp: 1689558823732 }, url: "/build/manifest-BA5558FA.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-2HFVEHNT.js", imports: ["/build/_shared/chunk-ZWGWGGVF.js", "/build/_shared/chunk-GIAAE3CH.js", "/build/_shared/chunk-PI7TTO4D.js", "/build/_shared/chunk-A6HGE4TO.js", "/build/_shared/chunk-NMZL6IDN.js", "/build/_shared/chunk-BOXFZXVX.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-JRR4GN5B.js", imports: ["/build/_shared/chunk-GA656LDU.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/$": { id: "routes/$", parentId: "root", path: "*", index: void 0, caseSensitive: void 0, module: "/build/routes/$-H6BRRO4B.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/Products": { id: "routes/Products", parentId: "root", path: "Products", index: void 0, caseSensitive: void 0, module: "/build/routes/Products-LGTV46M2.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/_auth.login-ZVOOSE5C.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_public._index": { id: "routes/_public._index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_public._index-UJOXNEGA.js", imports: ["/build/_shared/chunk-E624HSFK.js", "/build/_shared/chunk-PFGRK5I3.js", "/build/_shared/chunk-3WTIG3VJ.js", "/build/_shared/chunk-NCNOPK2L.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_public.team": { id: "routes/_public.team", parentId: "root", path: "team", index: void 0, caseSensitive: void 0, module: "/build/routes/_public.team-TFGHMRW4.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/about": { id: "routes/about", parentId: "root", path: "about", index: void 0, caseSensitive: void 0, module: "/build/routes/about-CWMH6BX2.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/clientonly": { id: "routes/clientonly", parentId: "root", path: "clientonly", index: void 0, caseSensitive: void 0, module: "/build/routes/clientonly-U6X55RUI.js", imports: ["/build/_shared/chunk-3WTIG3VJ.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core": { id: "routes/core", parentId: "root", path: "core", index: void 0, caseSensitive: void 0, module: "/build/routes/core-HMEMBFKF.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core.$userId": { id: "routes/core.$userId", parentId: "routes/core", path: ":userId", index: void 0, caseSensitive: void 0, module: "/build/routes/core.$userId-WJWQKBSW.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core._index": { id: "routes/core._index", parentId: "routes/core", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/core._index-56CJFFRX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core.level1": { id: "routes/core.level1", parentId: "routes/core", path: "level1", index: void 0, caseSensitive: void 0, module: "/build/routes/core.level1-E24R5LIA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core.level1.$userId": { id: "routes/core.level1.$userId", parentId: "routes/core.level1", path: ":userId", index: void 0, caseSensitive: void 0, module: "/build/routes/core.level1.$userId-Q2Q7SG3M.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/core.level1._index": { id: "routes/core.level1._index", parentId: "routes/core.level1", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/core.level1._index-LDEWQOYB.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/item": { id: "routes/item", parentId: "root", path: "item", index: void 0, caseSensitive: void 0, module: "/build/routes/item-7DQA43QZ.js", imports: ["/build/_shared/chunk-PFGRK5I3.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/item.$itemId": { id: "routes/item.$itemId", parentId: "routes/item", path: ":itemId", index: void 0, caseSensitive: void 0, module: "/build/routes/item.$itemId-M7AYW5EY.js", imports: ["/build/_shared/chunk-NCNOPK2L.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-GA656LDU.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/item.$itemId.edit": { id: "routes/item.$itemId.edit", parentId: "routes/item.$itemId", path: "edit", index: void 0, caseSensitive: void 0, module: "/build/routes/item.$itemId.edit-3EC2XLI4.js", imports: ["/build/_shared/chunk-YLXSWQSE.js", "/build/_shared/chunk-5QWEE6PU.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items": { id: "routes/items", parentId: "root", path: "items", index: void 0, caseSensitive: void 0, module: "/build/routes/items-BON4I7UO.js", imports: ["/build/_shared/chunk-NCNOPK2L.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.$": { id: "routes/items.$", parentId: "routes/items", path: "*", index: void 0, caseSensitive: void 0, module: "/build/routes/items.$-SOO4ULVQ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.$itemId": { id: "routes/items.$itemId", parentId: "routes/items", path: ":itemId", index: void 0, caseSensitive: void 0, module: "/build/routes/items.$itemId-UTTXMII7.js", imports: ["/build/_shared/chunk-GA656LDU.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/items._index": { id: "routes/items._index", parentId: "routes/items", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/items._index-AXFF5QR3.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.list": { id: "routes/items.list", parentId: "routes/items", path: "list", index: void 0, caseSensitive: void 0, module: "/build/routes/items.list-TXNWFV2V.js", imports: ["/build/_shared/chunk-E624HSFK.js", "/build/_shared/chunk-PFGRK5I3.js", "/build/_shared/chunk-3WTIG3VJ.js", "/build/_shared/chunk-GA656LDU.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.list.add": { id: "routes/items.list.add", parentId: "routes/items.list", path: "add", index: void 0, caseSensitive: void 0, module: "/build/routes/items.list.add-5I2YCUXQ.js", imports: ["/build/_shared/chunk-YLXSWQSE.js", "/build/_shared/chunk-5QWEE6PU.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/items.list.edit.$itemId": { id: "routes/items.list.edit.$itemId", parentId: "routes/items.list", path: "edit/:itemId", index: void 0, caseSensitive: void 0, module: "/build/routes/items.list.edit.$itemId-344PU3YG.js", imports: ["/build/_shared/chunk-YLXSWQSE.js", "/build/_shared/chunk-5QWEE6PU.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products._index": { id: "routes/products._index", parentId: "root", path: "products", index: !0, caseSensitive: void 0, module: "/build/routes/products._index-DCM6GAGH.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products.add-new": { id: "routes/products.add-new", parentId: "root", path: "products/add-new", index: void 0, caseSensitive: void 0, module: "/build/routes/products.add-new-VQNX5UH6.js", imports: ["/build/_shared/chunk-ABVOK2F5.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-5QWEE6PU.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products.view": { id: "routes/products.view", parentId: "root", path: "products/view", index: void 0, caseSensitive: void 0, module: "/build/routes/products.view-DR5XVTQL.js", imports: ["/build/_shared/chunk-YLXSWQSE.js", "/build/_shared/chunk-ABVOK2F5.js", "/build/_shared/chunk-G7CHZRZX.js", "/build/_shared/chunk-5QWEE6PU.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "4da99e05", hmr: { runtime: "/build/_shared\\chunk-A6HGE4TO.js", timestamp: 1689565196300 }, url: "/build/manifest-4DA99E05.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public\\build", future = { v2_dev: !0, unstable_postcss: !1, unstable_tailwind: !1, v2_errorBoundary: !0, v2_headers: !0, v2_meta: !0, v2_normalizeFormMethod: !0, v2_routeConvention: !0 }, publicPath = "/build/", entry = { module: entry_server_exports }, dev = { port: 3001 }, routes = {
@@ -2076,6 +2415,14 @@ var assetsBuildDirectory = "public\\build", future = { v2_dev: !0, unstable_post
     index: !0,
     caseSensitive: void 0,
     module: core_level1_index_exports
+  },
+  "routes/item.$itemId.edit": {
+    id: "routes/item.$itemId.edit",
+    parentId: "routes/item.$itemId",
+    path: "edit",
+    index: void 0,
+    caseSensitive: void 0,
+    module: item_itemId_edit_exports
   },
   "routes/products.add-new": {
     id: "routes/products.add-new",
@@ -2132,6 +2479,14 @@ var assetsBuildDirectory = "public\\build", future = { v2_dev: !0, unstable_post
     index: void 0,
     caseSensitive: void 0,
     module: core_userId_exports
+  },
+  "routes/item.$itemId": {
+    id: "routes/item.$itemId",
+    parentId: "routes/item",
+    path: ":itemId",
+    index: void 0,
+    caseSensitive: void 0,
+    module: item_itemId_exports
   },
   "routes/items._index": {
     id: "routes/items._index",
@@ -2228,6 +2583,14 @@ var assetsBuildDirectory = "public\\build", future = { v2_dev: !0, unstable_post
     index: void 0,
     caseSensitive: void 0,
     module: core_exports
+  },
+  "routes/item": {
+    id: "routes/item",
+    parentId: "root",
+    path: "item",
+    index: void 0,
+    caseSensitive: void 0,
+    module: item_exports
   },
   "routes/$": {
     id: "routes/$",

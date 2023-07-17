@@ -19,9 +19,9 @@ export default function MainNav() {
   return (
     <Stack direction="column" justifyContent="start" alignItems="center" spacing={ 2 }>
       <Link to="/">
-        <Stack direction="row" justifyContent="center" alignItems="center" spacing={ 2 }>
+        <Stack direction="row" justifyContent="center" alignItems="center">
           <img src="/images/mixing.png" alt="logo" height="29px" />
-          <h1>Kevin's Grocery List</h1>
+          <h1 style={ {marginLeft: '10px'} }>Kevin's Grocery List</h1>
         </Stack>
         
       </Link>
@@ -32,7 +32,7 @@ export default function MainNav() {
             return (
               <NavLink prefetch={ getPrefetch(navItem.id) } key={ navItem.id } to={ navItem.path } 
                 className={ ({ isActive, isPending,  }) => {
-                  if (location.pathname.includes('/items/')) {
+                  if (location.pathname.includes('/item/')) {
                     if (location.pathname.includes(navItem.path.split('/')[1])) {
                       return 'active';
                     }
@@ -63,6 +63,11 @@ export default function MainNav() {
   
 const navOptions: NavItem[] = [
   {
+    displayName: 'Home',
+    path: '/',
+    id: 'home',
+  },
+  {
     displayName: 'Wishlist',
     path: '/wishlist',
     id: 'wishlist',
@@ -86,6 +91,11 @@ const navOptions: NavItem[] = [
     displayName: 'Client Only (no SSR)',
     path: '/clientonly',
     id: 'clientonly',
+  },
+  {
+    displayName: 'Team',
+    path: '/team',
+    id: 'team',
   },
   {
     displayName: 'Login',
