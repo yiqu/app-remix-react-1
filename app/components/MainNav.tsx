@@ -21,7 +21,7 @@ export default function MainNav() {
       <Link to="/">
         <Stack direction="row" justifyContent="center" alignItems="center">
           <img src="/images/mixing.png" alt="logo" height="29px" />
-          <h1 style={ {marginLeft: '10px'} }>Kevin's Grocery List</h1>
+          <h1>Welcome</h1>
         </Stack>
         
       </Link>
@@ -63,19 +63,9 @@ export default function MainNav() {
   
 const navOptions: NavItem[] = [
   {
-    displayName: 'Wishlist',
-    path: '/wishlist',
-    id: 'wishlist',
-  },
-  {
-    displayName: 'Deals',
-    path: '/deals',
-    id: 'deals',
-  },
-  {
-    displayName: 'Items',
-    path: '/items/list',
-    id: 'items',
+    displayName: 'Core',
+    path: '/core',
+    id: 'core',
   },
   {
     displayName: 'About',
@@ -83,15 +73,25 @@ const navOptions: NavItem[] = [
     id: 'about',
   },
   {
-    displayName: 'Client Only (no SSR)',
-    path: '/clientonly',
-    id: 'clientonly',
+    displayName: 'Products',
+    path: '/products',
+    id: 'products',
+  },
+  {
+    displayName: 'Items',
+    path: '/items/list',
+    id: 'items',
   },
   {
     displayName: 'Login',
     path: '/login',
     id: 'login',
   },
+  {
+    displayName: 'Client Only (no SSR)',
+    path: '/clientonly',
+    id: 'clientonly',
+  }
 ];
 
 export const getPrefetch = (routeId: string) => {
