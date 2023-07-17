@@ -4,7 +4,7 @@ import { Link, Outlet, useActionData, useFetcher, useLoaderData, useNavigate, us
 import ItemDisplay from "~/components/Item";
 import type { Item } from "~/models/item.model";
 import { useCallback } from "react";
-import { Refresh } from "@mui/icons-material";
+import Refresh from "@mui/icons-material/Refresh";
 import { getAllItems } from "~/api/items.server";
 
 export const meta: V2_MetaFunction = () => {
