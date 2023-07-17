@@ -1,5 +1,5 @@
-import { List, Stack, Typography } from "@mui/material";
-import { Link, Outlet, useActionData, useLoaderData, useNavigate, useRouteLoaderData } from "@remix-run/react";
+import { Button, List, Stack, Typography } from "@mui/material";
+import { Link, Outlet, useActionData, useFetcher, useLoaderData, useNavigate, useRouteLoaderData } from "@remix-run/react";
 import type { ProductFire } from "~/models/products.model";
 import { addItem, deleteItemById, getAllItems, updateItemById } from "~/api/items.server";
 import type { ActionArgs} from "@remix-run/node";
@@ -8,11 +8,19 @@ import { formatDistanceToNow } from 'date-fns';
 import ItemDisplay from "~/components/Item";
 import type { Item } from "~/models/item.model";
 import { useCallback } from "react";
+import Refresh from "@mui/icons-material/Refresh";
 
 function ItemsView() {
   const data = useRouteLoaderData('routes/items') as Item[];
   const nav = useNavigate();
+  const fetcher = useFetcher();
   //const data = useLoaderData<typeof loader>();
+
+  const handleOnRefresh = () => {
+    nav('./', {
+      replace: true
+    });
+  };
 
   const handleItemAction = useCallback((item: Item) => (actionId: 'edit' | 'delete') => {
     switch(actionId) {
@@ -21,7 +29,6 @@ function ItemsView() {
         break;
       }
       case 'delete': {
-
         break;
       }
     }
@@ -37,7 +44,12 @@ function ItemsView() {
 
   return (
     <Stack direction="column" justifyContent="start" alignItems="center" id="item-list" width="30rem">
-      <Typography width="100%" textAlign="center">{data.length} items available.</Typography>
+      <Stack direction="row" justifyContent="start" alignItems="center" width="100%">
+        <Typography width="100%" textAlign="start">{data.length} items available.</Typography>
+        <Button startIcon={ <Refresh /> } variant="outlined" onClick={ handleOnRefresh } disabled={ fetcher.state === 'loading' }>
+          { fetcher.state === 'loading' ? 'Refreshing...' : 'Refresh' }
+        </Button>
+      </Stack>
       <Stack direction="column" justifyContent="start" alignItems="center" width="100%" spacing={ 1 }>
         <List dense sx={ {width: '100%'} }>
           {
@@ -82,11 +94,4 @@ export async function action({ request, context, params }: ActionArgs) {
     });
   }
   return redirect(`/items/list?${action}=${body.get('name')}`);
-  //return redirect(`/items/list`);
-  //return new Response(JSON.stringify(result), {status: 200, statusText: 'OK'});
 }
-
-// export async function loader() {
-//   const result = await getAllItems();
-//   return json(result);
-// }
