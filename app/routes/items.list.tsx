@@ -13,7 +13,7 @@ import { Refresh } from "@mui/icons-material";
 function ItemsView() {
   const data = useRouteLoaderData('routes/items') as Item[];
   const nav = useNavigate();
-  const fetcher = useFetcher();
+  //const fetcher = useFetcher();
   //const data = useLoaderData<typeof loader>();
 
   const handleOnRefresh = () => {
