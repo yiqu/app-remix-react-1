@@ -8,7 +8,7 @@ import { formatDistanceToNow } from 'date-fns';
 import ItemDisplay from "~/components/Item";
 import type { Item } from "~/models/item.model";
 import { useCallback } from "react";
-import { Refresh } from "@mui/icons-material";
+import Refresh from "@mui/icons-material/Refresh";
 
 function ItemsView() {
   const data = useRouteLoaderData('routes/items') as Item[];
@@ -94,9 +94,4 @@ export async function action({ request, context, params }: ActionArgs) {
     });
   }
   return redirect(`/items/list?${action}=${body.get('name')}`);
-}
-
-export async function loader() {
-  const result = await getAllItems();
-  return json(result);
 }
