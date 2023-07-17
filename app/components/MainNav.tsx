@@ -19,9 +19,9 @@ export default function MainNav() {
   return (
     <Stack direction="column" justifyContent="start" alignItems="center" spacing={ 2 }>
       <Link to="/">
-        <Stack direction="row" justifyContent="center" alignItems="center" spacing={ 2 }>
+        <Stack direction="row" justifyContent="center" alignItems="center">
           <img src="/images/mixing.png" alt="logo" height="29px" />
-          <h1>Kevin's Grocery List</h1>
+          <h1 style={ {marginLeft: '10px'} }>Kevin's Grocery List</h1>
         </Stack>
         
       </Link>

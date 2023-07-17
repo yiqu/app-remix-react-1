@@ -1,6 +1,6 @@
 import { json, type V2_MetaFunction } from "@remix-run/node";
 import { Button, List, Stack, Typography } from "@mui/material";
-import { Link, Outlet, useActionData, useFetcher, useLoaderData, useNavigate, useRouteLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData, useNavigate, useRouteLoaderData } from "@remix-run/react";
 import ItemDisplay from "~/components/Item";
 import type { Item } from "~/models/item.model";
 import { useCallback } from "react";
