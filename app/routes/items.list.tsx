@@ -95,3 +95,8 @@ export async function action({ request, context, params }: ActionArgs) {
   }
   return redirect(`/items/list?${action}=${body.get('name')}`);
 }
+
+export async function loader() {
+  const result = await getAllItems();
+  return json(result);
+}
