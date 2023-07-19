@@ -83,7 +83,7 @@ export async function loader() {
   const result = await getAllItems();
   return json(result, {
     headers: {
-      'Cache-Control': 'max-age=3600, public'
+      'Cache-Control': 'max-age=1, public'
     }
   });
 }
