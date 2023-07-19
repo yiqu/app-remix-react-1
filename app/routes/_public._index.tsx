@@ -81,11 +81,7 @@ export default function Index() {
   
 export async function loader() {
   const result = await getAllItems();
-  return json(result, {
-    headers: {
-      'Cache-Control': 'max-age=1, public'
-    }
-  });
+  return json(result);
 }
 
 
