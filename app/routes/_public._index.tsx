@@ -1,12 +1,13 @@
 import { json, type V2_MetaFunction } from "@remix-run/node";
 import { Box, Button, List, Stack, Typography } from "@mui/material";
-import { Link, useLoaderData, useNavigate } from "@remix-run/react";
+import { Link, useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
 import ItemDisplay from "~/components/Item";
 import type { Item } from "~/models/item.model";
 import { useCallback } from "react";
 import Refresh from "@mui/icons-material/Refresh";
 import Add from "@mui/icons-material/Add";
 import { getAllItems } from "~/api/items.server";
+import GenericErrorPage from "~/components/GenericErrorPage";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -19,6 +20,7 @@ export default function Index() {
 
   const nav = useNavigate();
   const data: Item[] = useLoaderData<typeof loader>();
+  const fetcher = useFetcher();
 
   const handleOnRefresh = () => {
     nav('./', { replace: true });
@@ -27,7 +29,10 @@ export default function Index() {
   const handleItemAction = useCallback((item: Item) => (actionId: 'edit' | 'delete') => {
     switch(actionId) {
       case 'edit': {
-        nav(`/items/list/edit/${item.id}`, { state: { item } });
+        nav({
+          pathname: `/item/${item.id}/edit`,
+          search: '?dialogCloseRedirect=/'
+        }, { state: { item } });
         break;
       }
       case 'delete': {
@@ -35,10 +40,6 @@ export default function Index() {
       }
     }
   }, [nav]);
-
-  const handleAdd = () => {
-    
-  };
 
   if (data.length < 1) {
     return (
@@ -53,10 +54,12 @@ export default function Index() {
       <Stack direction="row" justifyContent="space-between" alignItems="center" width="100%">
         <Typography flexBasis="35%" textAlign="start">{data.length} items available.</Typography>
         <Stack direction="row" justifyContent="end" alignItems="center" spacing={ 1 }>
-          <Button startIcon={ <Add /> } variant="outlined" onClick={ handleAdd }>
-            New Item
-          </Button>
-          <Button startIcon={ <Refresh /> } variant="outlined" onClick={ handleOnRefresh }>
+          <Link to="/add">
+            <Button startIcon={ <Add /> } variant="text">
+              New Item
+            </Button>
+          </Link>
+          <Button startIcon={ <Refresh /> } variant="text" onClick={ handleOnRefresh }>
             Refresh
           </Button>
         </Stack>
@@ -78,5 +81,16 @@ export default function Index() {
   
 export async function loader() {
   const result = await getAllItems();
-  return json(result);
+  return json(result, {
+    headers: {
+      'Cache-Control': 'max-age=3600, public'
+    }
+  });
 }
+
+
+// Auto redirec to a route
+  
+// export async function loader() {
+//   return redirect('/welcome');
+// }

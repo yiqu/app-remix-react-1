@@ -1,6 +1,6 @@
 import { Button, DialogActions, DialogContent, Divider, Stack, Typography } from "@mui/material";
 import type { RouteMatch} from "@remix-run/react";
-import { Form, useActionData, useLocation, useMatches, useNavigate, useNavigation, useParams, useRouteLoaderData, useSubmit } from "@remix-run/react";
+import { Form, useActionData, useLocation, useMatches, useNavigate, useNavigation, useParams, useRouteLoaderData, useSearchParams, useSubmit } from "@remix-run/react";
 import DialogLayout from "~/components/DialogLayout";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { productSchema } from "~/constants/schemas";
@@ -16,6 +16,9 @@ function EditItem() {
   const match = useMatches();
   const submit = useSubmit();
   const transition = useNavigation();
+  const [search, setSearchParams] = useSearchParams();
+
+  const afterCloseRedirectUrl = search.get('dialogCloseRedirect') || `/item/${params.itemId}`;
 
   const item: Item | null = match.find((route: RouteMatch) => {
     return route.id === 'routes/item.$itemId';
@@ -40,7 +43,7 @@ function EditItem() {
   };
 
   const handleClose = () => {
-    nav(`/item/${params.itemId}`, {replace: true});
+    nav(`${afterCloseRedirectUrl}`, {replace: true});
   };
 
   if (!item) {

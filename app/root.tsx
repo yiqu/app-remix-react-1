@@ -1,11 +1,15 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
+  Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
+  useRouteError,
 } from "@remix-run/react";
 import MainNav from "./components/MainNav";
 
@@ -27,17 +31,18 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export default function App() {
+function Document({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <title>{ title }</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
-        <MainNav />
+        <MainNav children={ children } />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
@@ -45,3 +50,37 @@ export default function App() {
     </html>
   );
 }
+
+export default function App() {
+  return (
+    <Document title="Kevin's Grocery List">
+      <Outlet />
+    </Document>
+  );
+}
+
+
+export function ErrorBoundary({ error }: { error: any }) {
+  
+  const err: any = useRouteError();
+  
+  let comp = <div>Error: {err.status} - {err.statusText}</div>;
+  
+  if (isRouteErrorResponse(error)) {
+    comp = (
+      <div>
+        <h1>Oops</h1>
+        <p>Status: {error.status} - {error.statusText}</p>
+        <p>{error.data.message}</p>
+        <Link to={ '/items/list' }>Back to Safely</Link>
+      </div>
+    );
+  }
+  
+  return (
+    <Document title="Error! | Kevin's Grocery List">
+      <h1>{ comp } </h1>
+    </Document>
+  );
+}
+

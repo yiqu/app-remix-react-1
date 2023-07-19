@@ -14,8 +14,7 @@ export async function addItem(item: ItemToAdd) {
     });
     return res;
   } catch (error) {
-    console.error(error);
-    throw error;
+    throw new Error("Error occured trying to add item.");
   }
 }
 
@@ -28,8 +27,7 @@ export async function getAllItems() {
     });
     return res;
   } catch (error) {
-    console.error(error);
-    throw error;
+    throw new Error("Error occured trying to get all items.");
   }
 }
 
@@ -63,8 +61,7 @@ export async function updateItemById(id: string, item: ItemToAdd) {
     });
     return res;
   } catch (error) {
-    console.error(error);
-    throw error;
+    throw new Error("Error occured trying to update item.");
   }
 }
 
@@ -78,7 +75,6 @@ export async function deleteItemById(id: string) {
     });
     return res;
   } catch (error) {
-    console.error(error);
-    throw error;
+    throw new Error("Error occured trying to delete item.");
   }
 }

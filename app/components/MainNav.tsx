@@ -10,7 +10,7 @@ export const meta: V2_MetaFunction = () => {
   ];
 };
 
-export default function MainNav() {
+export default function MainNav({ children }: { children: React.ReactNode }) {
 
   const navigation = useNavigation();
   const location = useLocation();
@@ -53,7 +53,7 @@ export default function MainNav() {
       </Box>
 
       <Stack id="main-content" direction="row" justifyContent="center" alignItems="start" width="100%" height="100vh"> 
-        <Outlet />
+        { children }
       </Stack>
       
 
@@ -101,6 +101,11 @@ const navOptions: NavItem[] = [
     displayName: 'Login',
     path: '/login',
     id: 'login',
+  },
+  {
+    displayName: 'Doesnt exist',
+    path: '/aaa',
+    id: 'aaa',
   },
 ];
 
