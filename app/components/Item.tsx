@@ -11,7 +11,7 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 
 export interface ItemProp {
   item: Item;
-  onAction: (actionId: 'edit' | 'delete') => void;
+  onAction: (actionId: 'edit') => void;
 }
 
 function Item({ item, onAction }: ItemProp) {
@@ -26,9 +26,9 @@ function Item({ item, onAction }: ItemProp) {
 
       if (!proceed) return;
       
-      deleteFetcher.submit(null, {
+      deleteFetcher.submit({id: item.id}, {
         method: 'delete',
-        action: `/items/${item.id}`
+        action: `/?index`
       });
     } 
     else if (action === 'edit') {

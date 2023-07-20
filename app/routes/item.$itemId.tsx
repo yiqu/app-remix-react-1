@@ -18,8 +18,8 @@ function ItemDetail() {
         {
           itemDetail ? (
             <>
-              <Typography width="100%" textAlign="center">Name: {itemDetail.name}</Typography>
-              <Typography width="100%" textAlign="center">Price: ${itemDetail.price}</Typography>
+              <Typography width="100%">Name: {itemDetail.name}</Typography>
+              <Typography width="100%">Price: ${itemDetail.price}</Typography>
             </>
           ) : (<>Did not find a item with the id: { params.itemId }</>)
         }
@@ -49,11 +49,6 @@ export async function action({ request, context, params }: ActionArgs) {
   if (request.method === 'DELETE' && !intent) {
     await deleteItemById(params.itemId as string);
     return redirect('/');
-  }
-
-  if (intent === 'delete') {
-    await deleteItemById(body.get("id") as string);
-    return json({ deleted: true }, { status: 200, statusText: 'OK' });
   }
 
   if (intent === 'update') {

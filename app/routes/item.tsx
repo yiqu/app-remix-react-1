@@ -12,9 +12,9 @@ function Item() {
     const proceed = confirm(`Are you sure you want to delete this item?`);
     if (!proceed) return;
     
-    deleteFetcher.submit(null, {
+    deleteFetcher.submit({ id: itemId ?? '' }, {
       method: 'delete',
-      action: `/item/${itemId}`
+      action: `/?index`
     });
   };
 

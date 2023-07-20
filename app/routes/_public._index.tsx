@@ -1,4 +1,5 @@
-import { json, type V2_MetaFunction } from "@remix-run/node";
+import type { ActionArgs} from "@remix-run/node";
+import { json, redirect, type V2_MetaFunction } from "@remix-run/node";
 import { Box, Button, List, Stack, Typography } from "@mui/material";
 import { Link, useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
 import ItemDisplay from "~/components/Item";
@@ -6,8 +7,7 @@ import type { Item } from "~/models/item.model";
 import { useCallback } from "react";
 import Refresh from "@mui/icons-material/Refresh";
 import Add from "@mui/icons-material/Add";
-import { getAllItems } from "~/api/items.server";
-import GenericErrorPage from "~/components/GenericErrorPage";
+import { deleteItemById, getAllItems } from "~/api/items.server";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -22,20 +22,13 @@ export default function Index() {
   const data: Item[] = useLoaderData<typeof loader>();
   const fetcher = useFetcher();
 
-  const handleOnRefresh = () => {
-    nav('./', { replace: true });
-  };
-
-  const handleItemAction = useCallback((item: Item) => (actionId: 'edit' | 'delete') => {
+  const handleItemAction = useCallback((item: Item) => (actionId: 'edit') => {
     switch(actionId) {
       case 'edit': {
         nav({
           pathname: `/item/${item.id}/edit`,
           search: '?dialogCloseRedirect=/'
         }, { state: { item } });
-        break;
-      }
-      case 'delete': {
         break;
       }
     }
@@ -59,9 +52,6 @@ export default function Index() {
               New Item
             </Button>
           </Link>
-          <Button startIcon={ <Refresh /> } variant="text" onClick={ handleOnRefresh }>
-            Refresh
-          </Button>
         </Stack>
       </Stack>
       <Stack direction="column" justifyContent="start" alignItems="center" width="100%" spacing={ 1 }>
@@ -81,12 +71,27 @@ export default function Index() {
   
 export async function loader() {
   const result = await getAllItems();
-  return json(result);
+  return json(result, 
+    {
+      headers: {
+        'Cache-Control': 'max-age=3600, public'
+      }
+    }
+  );
+}
+
+export async function action({ request, context, params }: ActionArgs) {
+  const body = await request.formData();
+  const itemId = body.get('id') as string | null;
+  if (itemId) {
+    await deleteItemById(itemId);
+    return redirect('/');
+  }
+  throw json({ message: 'No ID provided.' }, { status: 400 });
 }
 
 
 // Auto redirec to a route
-  
 // export async function loader() {
 //   return redirect('/welcome');
 // }
